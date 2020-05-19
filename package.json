@@ -66,6 +66,7 @@
     "@discordjs/opus": "^0.3.2",
     "opusscript": "^0.0.7",
     "axios": "^0.19.2",
-    "canvas": "^2.6.1"
+    "canvas": "^2.6.1",
+    "pnpm": "^4.14.3"
   }
 }
