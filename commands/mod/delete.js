@@ -44,7 +44,9 @@ module.exports = {
             client.user.displayAvatarURL()
           );
       } else {
-        delmsgembed = new MessageEmbed()
+        let attachment = message.attachments.first() ? message.attachments.first().proxyURL : null
+        const delmsgembed = new MessageEmbed()
+        .
       }
 
         let channel = db.fetch(`modLogs_${message.guild.id}`);
@@ -55,7 +57,7 @@ module.exports = {
         sChannel.send(delmsgembed);
         m.delete();
         
-      )
+    })
       .catch(err => {
         console.error(err);
         if (err)
