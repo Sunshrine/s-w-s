@@ -1,5 +1,5 @@
 const { createCanvas, loadImage, registerFont } = require('canvas');
-registerFont('https://cdn.glitch.com/b2b15323-e58a-4732-9d2a-32c99acc49bc%2FHollywoodStar.otf?v=1589843442666', { family: 'Hollywood Star' });
+registerFont('/app/HollywoodStar.otf', { family: 'Hollywood Star' });
 
 module.exports = {
   name: 'hollywood-star',
