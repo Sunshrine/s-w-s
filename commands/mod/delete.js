@@ -29,6 +29,7 @@ module.exports = {
     message.channel.messages
       .fetch(id)
       .then(m => {
+      if(!m.attachments.first()) {
         const delmsgembed = new MessageEmbed()
           .setTitle("Message Deleted")
           .addField("Message ID", id)
@@ -42,6 +43,9 @@ module.exports = {
             client.user.username.toUpperCase(),
             client.user.displayAvatarURL()
           );
+      } else {
+        delmsgembed = new MessageEmbed()
+      }
 
         let channel = db.fetch(`modLogs_${message.guild.id}`);
         if (!channel || channel === null) return;
@@ -50,7 +54,8 @@ module.exports = {
         if (!sChannel) return;
         sChannel.send(delmsgembed);
         m.delete();
-      })
+        
+      )
       .catch(err => {
         console.error(err);
         if (err)

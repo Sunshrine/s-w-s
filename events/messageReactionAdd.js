@@ -2,6 +2,12 @@ const { MessageEmbed } = require("discord.js"),
   db = require("quick.db");
 
 module.exports = async (client, messageReaction, user) => {
+
+  let W = client.settings.get(messageReaction.message.guild.id) 
+    if(W && W !== undefined || null) {
+      if(W.toggleStarboard === false) return;
+    } else return;
+  
   if (messageReaction.emoji.name === "⭐") {
     const channel = db.fetch(`starBoard_${messageReaction.message.guild.id}`);
     if (!channel) return;
