@@ -7,21 +7,31 @@ module.exports = {
   usage: '[setting]',
   run: async (client, message, args) => {
     
-    
-    
     let X = client.settings.get(message.guild.id)
     if(!X || X === null || undefined) client.settings.set(message.guild.id, {
-      toggleStarboard: false,
-      toggleWelcome: true,
-      toggleAutoMod: false
+      toggleStarboard: {
+        type: false,
+        message: ''
+      },
+      toggleWelcome: {
+        type: false,
+        message: ''
+      },
+      toggleAutoMod: {
+        type: false,
+        message: ''
+      }
     })
+    
+    X = await client.settings.get(message.guild.id)
     
     let settings = [X.toggleStarboard, X.toggleWelcome, X.toggleAutoMod]
-    settings.forEach(setting => {
-      if(X.setting === false) setting[0] = 'Not toggled on.'
-      message.channel.send(`${setting}: ${setting[0]}`)
-    })
     
+    settings.forEach(function (setting) {
+      if(setting.type === false) setting.message = 'Not toggled.'
+      if(setting.type === true) setting.message = 'Toggled.'
+      message.channel.send(`${setting}: ${setting.message}`)
+    })
     
     
   }
