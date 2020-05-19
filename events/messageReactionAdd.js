@@ -40,7 +40,7 @@ module.exports = async (client, messageReaction, user) => {
             .setTitle("Starred Message")
             .addField("Message Author", s.author)
             .addField("Message Content", s.content)
-            .addField("Created At", s.date)
+            .addField("Created At", s.created)
             .addField("URL", `[Click here!](${s.url})`)
             .setFooter(`${msg.id} - ${client.user.username.toUpperCase()}`)
 
