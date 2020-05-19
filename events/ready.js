@@ -1,4 +1,6 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js"),
+      figlet = require('figlet'),
+      boxen = require('boxen')
 
 module.exports = async (client, message) => {
   client.guilds.cache.forEach(async guild => {
@@ -10,6 +12,16 @@ module.exports = async (client, message) => {
         toggleAutoMod: false
       });
   });
+  figlet('Centauri', function(err, data) {
+    if (err) {
+        console.log('Something went wrong...');
+        console.dir(err);
+        return;
+    }
+    
+  console.log(boxen(data, {padding: 1, margin: 1, borderStyle: 'double'}));
+})
+    
   console.log(`Hi, ${client.user.username} is now online!`);
   setInterval(() => {
     client.user.setPresence({
