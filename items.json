@@ -1,0 +1,32 @@
+{
+  "Pickle": {
+    "name": "Pickle",
+    "type": "Fun",
+    "price": "100",
+    "description": "You want a pickle? 🥒"
+  },
+  "Weed": {
+    "name": "Weed",
+    "type": "Drugs",
+    "price": "100",
+    "description": "Ehh, it's weed."
+  },
+  "Lollipop": {
+    "name": "Lollipop",
+    "type": "Sweets",
+    "price": "50",
+    "description": "Sweet, sweet lollipop."
+  },
+  "Fish": {
+    "name": "Fish",
+    "type": "Food",
+    "price": "50",
+    "description": "It's a fish, you wanna eat it or slap someone with it?"
+  },
+  "KFC": {
+    "name": "KFC",
+    "type": "Food",
+    "price": "50",
+    "description": "A WILD BUCKET OF KFC APPEARED!"
+  }
+}
