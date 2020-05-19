@@ -29,10 +29,11 @@ module.exports = {
     message.channel.messages
       .fetch(id)
       .then(m => {
+      let delmsgembed;
       if(!m.attachments.first()) {
-        const delmsgembed = new MessageEmbed()
+        delmsgembed = new MessageEmbed()
           .setTitle("Message Deleted")
-          .addField("Message ID", id)
+          .addField("Message ID", m.id)
           .addField("Message Content", m.content)
           .addField("Message Author", m.author)
           .addField("Deleted By", message.author)
@@ -45,8 +46,21 @@ module.exports = {
           );
       } else {
         let attachment = message.attachments.first() ? message.attachments.first().proxyURL : null
-        const delmsgembed = new MessageEmbed()
-        .
+        if(attachment === null) return
+        delmsgembed = new MessageEmbed()
+        .setTitle("Image Deleted")
+        .addField("Message ID", m.id)
+        .addField("Message Author", m.author)
+        .addField("Deleted By", message.author)
+        .addField("Reason", reason)
+        .setTimestamp()
+        .setColor("RANDOM")
+        .setImage(attachment)
+        .setFooter(
+            client.user.username.toUpperCase(),
+            client.user.displayAvatarURL()
+          );
+        if(m.content) delmsgembed.addField("Message Content", m.content)
       }
 
         let channel = db.fetch(`modLogs_${message.guild.id}`);
