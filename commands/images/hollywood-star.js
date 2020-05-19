@@ -43,9 +43,9 @@ module.exports = {
       .setColor("PURPLE")
       .setDescription(
         `__**Credits**__
-                    \n[RedKid.net](http://www.redkid.net/): Image \|| [http://www.redkid.net/generator/star/](click here for generator) 
-                    \n[Alexey Star](https://alexeystar.com/):  Font - [https://alexeystar.com/hollywood-star-font/](click here for font)
-                    \nHollywood Walk of Fame: Concept - [https://walkoffame.com/](click here to visit url)`
+                    \n[RedKid.net](http://www.redkid.net/): Image - [click here to visit generator](http://www.redkid.net/generator/star/) 
+                    \n[Alexey Star](https://alexeystar.com/):  Font - [click here to check out the font](https://alexeystar.com/hollywood-star-font/)
+                    \nHollywood Walk of Fame: Concept - [click here to check the concept)](https://walkoffame.com/)`
       )
       .attachFiles(hollywood_img);
 
