@@ -18,7 +18,7 @@ module.exports = {
     if(!text) return message.reply('please put some text!')
     if(text > 30) return message.reply('oops! Looks like that\'s more than 30 characters long.')
     
-    const base = await loadImage('app/hollywood-star.png');
+    const base = await loadImage('/app/hollywood-star.png');
 		const canvas = createCanvas(base.width, base.height);
 		const ctx = canvas.getContext('2d');
 		ctx.drawImage(base, 0, 0);
