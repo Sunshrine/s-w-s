@@ -26,7 +26,7 @@ module.exports = {
 		ctx.fillStyle = '#fadfd4';
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'top';
-		ctx.fillText(name.toLowerCase(), 288, 140);
+		ctx.fillText(text.toLowerCase(), 288, 140);
     
     const hollywood_img = new MessageAttachment(canvas.toBuffer(), 'hollywood-star.png')
     
@@ -37,7 +37,7 @@ module.exports = {
                     \n[Alexey Star](https://alexeystar.com/) || Font || [https://alexeystar.com/hollywood-star-font/](click here for font)
                     \nHollywood Walk of Fame || Concept|| [https://walkoffame.com/](click here to visit url)`
                    )
-    .setImage(hollywood_img)
+    .setImage('attachment://hollywood_img')
     
     message.channel.send(hollywood_embed)
   }
