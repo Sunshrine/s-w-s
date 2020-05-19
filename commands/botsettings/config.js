@@ -23,9 +23,9 @@ module.exports = {
       }
     })
     
-    X = await client.settings.get(message.guild.id)
+    X = client.settings.get(message.guild.id)
     
-    let settings = [X.toggleStarboard, X.toggleWelcome, X.toggleAutoMod]
+    let settings = Object.entries
     
     console.log(client.settings)
     

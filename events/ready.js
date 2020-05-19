@@ -3,17 +3,6 @@ const { MessageEmbed } = require("discord.js"),
       boxen = require('boxen')
 
 module.exports = async (client, message) => {
-  client.guilds.cache.forEach(async guild => {
-    let x = await client.settings.get(guild.id);
-    if (!x || x === null || x === undefined)
-      client.settings.set(guild.id, {
-        toggleStarboard: false,
-        toggleWelcome: false,
-        toggleAutoMod: false
-      })
-    client.settings.delete(guild.id)
-    console.log(`Deleted ${guild.name} with ID ${guild.id} off the settign`)
-  });
   figlet.text('Centauri', {
       horizontalLayout: 'fitted'
   }, function(err, data) {

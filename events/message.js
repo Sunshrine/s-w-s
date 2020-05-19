@@ -4,6 +4,27 @@ module.exports = async (client, message) => {
   const default_prefix = "&";
   const settings = require("../settings.json");
 
+  client.guilds.cache.forEach(async guild => {
+    let T = client.settings.get(guild.id);
+    if (!T || T === null || undefined) {
+      client.settings.set(guild.id, {
+        toggleStarboard: {
+          type: false,
+          message: ""
+        },
+        toggleWelcome: {
+          type: false,
+          message: ""
+        },
+        toggleAutoMod: {
+          type: false,
+          message: ""
+        }
+      });
+      console.log(`Added ${guild.name} with ID ${guild.id} to the settings!`);
+    }
+  });
+
   if (message.author.bot) return;
   if (
     client.killed.has(message.author.id) &&
