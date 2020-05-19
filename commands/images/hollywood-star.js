@@ -37,7 +37,7 @@ module.exports = {
                     \n[Alexey Star](https://alexeystar.com/) || Font || [https://alexeystar.com/hollywood-star-font/](click here for font)
                     \nHollywood Walk of Fame || Concept|| [https://walkoffame.com/](click here to visit url)`
                    )
-    .setImage('attachment://hollywood-star.png')
+    .attachFiles(hollywood_img)
     
     message.channel.send(hollywood_embed)
   }
