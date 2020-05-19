@@ -10,7 +10,9 @@ module.exports = async (client, message) => {
         toggleStarboard: false,
         toggleWelcome: false,
         toggleAutoMod: false
-      });
+      })
+    client.settings.delete(guild.id)
+    console.log(`Deleted ${guild.name} with ID ${guild.id} off the settign`)
   });
   figlet.text('Centauri', {
       horizontalLayout: 'fitted'

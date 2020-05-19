@@ -27,6 +27,8 @@ module.exports = {
     
     let settings = [X.toggleStarboard, X.toggleWelcome, X.toggleAutoMod]
     
+    console.log(client.settings)
+    
     settings.forEach(function (setting) {
       if(setting.type === false) setting.message = 'Not toggled.'
       if(setting.type === true) setting.message = 'Toggled.'
