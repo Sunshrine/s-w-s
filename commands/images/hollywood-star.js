@@ -1,5 +1,6 @@
 const { createCanvas, loadImage, registerFont } = require('canvas'),
-      { MessageEmbed, MessageAttachment } = require('discord.js')
+      { MessageEmbed, MessageAttachment } = require('discord.js'),
+      premium = require('../../premiumusers.json')
 registerFont('/app/HollywoodStar.otf', { family: 'Hollywood Star' });
 
 module.exports = {
@@ -9,6 +10,8 @@ module.exports = {
   usage: '<text>',
   category: 'fun',
   run: async (client, message, args) => {
+    
+    if(!premium.users.includes(message.author.id)) return message.reply('you don\'t have premium!').then(m => m.delete({ "timeout": 1500 }))
     
     let text = args.slice(0).join(' ')
     
@@ -30,6 +33,12 @@ module.exports = {
     const hollywood_embed = new MessageEmbed()
     .setColor('PURPLE')
     .setDescription(`__**Credits**__
-                    \n[Red]()`)
+                    \n[RedKid.net](http://www.redkid.net/) || Image || [http://www.redkid.net/generator/star/](click here for generator) 
+                    \n[Alexey Star](https://alexeystar.com/) || Font || [https://alexeystar.com/hollywood-star-font/](click here for font)
+                    \nHollywood Walk of Fame || Concept|| [https://walkoffame.com/](click here to visit url)`
+                   )
+    .setImage(hollywood_img)
+    
+    message.channel.send(hollywood_embed)
   }
 }
