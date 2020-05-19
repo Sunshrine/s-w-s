@@ -12,7 +12,9 @@ module.exports = async (client, message) => {
         toggleAutoMod: false
       });
   });
-  figlet('Centauri', function(err, data) {
+  figlet.text('Centauri', {
+      horizontalLayout: 'fitted'
+  }, function(err, data) {
     if (err) {
         console.log('Something went wrong...');
         console.dir(err);
