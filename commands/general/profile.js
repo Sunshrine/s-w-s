@@ -8,10 +8,10 @@ module.exports = {
   aliases: ['prof'],
   run: async (client, message, args) => {
     
-    let xp = db.fetch(`profile_${message.author.id}.xp`)
-    let premiumstatus = db.fetch(`profile_${message.author.id}.premium`)
-    let level = db.fetch(`profile_${message.author.id}.level`)
-    let acknowledgements = db.fetch(`profile_${message.author.id}.acknowlegdements`)
+    let xp = db.fetch(`xp_${message.author.id}`)
+    let premiumstatus = db.fetch(`premium_${message.author.id}`)
+    let level = db.fetch(`level_${message.author.id}`)
+    let acknowledgements = db.fetch(`acknowlegdements_${message.author.id}`)
     
     if(!xp || xp === null || undefined) xp = 0
     if(!premiumstatus || premiumstatus === null || undefined) premiumstatus = 'No premium.'
