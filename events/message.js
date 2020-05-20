@@ -75,18 +75,6 @@ module.exports = async (client, message) => {
       })
     );
   }
-  
-    let chance = Math.floor((Math.random() * 10) + 1)
-  
-  if(chance === 1) {
-    let xp = Math.floor((Math.random() * 5) + 1)
-    let xpProfile = db.fetch(`xp_${message.author.id}`)
-    if(!xpProfile || xpProfile === null || undefined) xpProfile = 0
-    db.add(`xp_${message.author.id}`, xp)
-    message.channel.send(`${message.author}, ${xp} XP has been added to your profile!`).then(msg => msg.delete({
-                                                                                             timeout: 2500
-                                                                                             }))
-  } else return
 
   const args = message.content
     .slice(prefix.length)
