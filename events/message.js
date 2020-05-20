@@ -8,18 +8,21 @@ module.exports = async (client, message) => {
     let T = client.settings.get(guild.id);
     if (!T || T === null || undefined) {
       client.settings.set(guild.id, {
-        toggleStarboard: {
-          type: false,
-          message: ""
-        },
-        toggleWelcome: {
-          type: false,
-          message: ""
-        },
-        toggleAutoMod: {
-          type: false,
-          message: ""
-        }
+     toggleStarboard: {
+        name: 'toggleStarboard',
+        type: false,
+        message: ''
+      },
+      toggleWelcome: {
+        name: 'toggleWelcome',
+        type: false,
+        message: ''
+      },
+      toggleAutoMod: {
+        name: 'toggleAutoMod',
+        type: false,
+        message: ''
+      }
       });
       console.log(`Added ${guild.name} with ID ${guild.id} to the settings!`);
     }
