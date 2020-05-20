@@ -12,22 +12,19 @@ module.exports = {
           const { MessageEmbed, MessageAttachment } = require('discord.js')
               const { get } = require("node-superfetch");
           
-          const { body } = get('https://v1.api.amethyste.moe/generate/discordhouse')
+          const { body } = get(`https://v1.api.amethyste.moe/generate/discordhouse`)
+          .query({ house: args[0].charAt(0).toUpperCase() + args[0].slice(1), url: message.author.displayAvatarURL({ format: 'png', size: 512 }) })
+          .set("Authorization", `Bearer ${process.env.AMETHYSTE_KEY}`);
           
-          ameApi.generate('discordhouse', {
-            'url': `${message.author.displayAvatarURL()}`,
-            'house': args[0].charAt(0).toUpperCase() + args[0].slice(1)
-          }).then(image => {
-                    const att = new MessageAttachment(image, "discordhouse.png");
+          let att = new MessageAttachment(body, 'discordhouse.png')
           
+
           const embed = new MessageEmbed()
           .setTitle('Here\'s your image!')
-          .attachFile(att)
+          .attachFiles(att)
          
           message.channel.send(embed)
-          }).catch(err => {
-                    throw err;
-          })
+  
           
     }
 }
