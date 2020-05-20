@@ -18,8 +18,18 @@ module.exports = {
     if(!level || level === null || undefined) level = 0
     if(!acknowledgements || acknowledgements === null || undefined) acknowledgements = 'User'
     
-    const embed = new MessageEmbed
-    .set
+    const embed = new MessageEmbed()
+    .setAuthor(message.author.displayAvatarURL(), 'Profile')
+    .setColor("ORANGE")
+    .setTitle(`${message.author.username}'s Profile`)
+    .addFields(
+      { name: 'XP', value: xp, inline: true },
+      { name: 'Premium Status', value: premiumstatus, inline: true },
+      { name: 'Level', value: level, inline: true },
+      { name: 'Acknowledgements', value: acknowledgements, inline: true }
+    )
+    .setFooter(client.user.displayAvatarURL(), `• ${client.user.username} Profiles`)
     
+    message.channel.send(embed)
   }
 }
