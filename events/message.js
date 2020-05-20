@@ -80,7 +80,7 @@ module.exports = async (client, message) => {
   
     let chance = Math.floor((Math.random() * 10) + 1)
   
-  if(chance > 5 || chance === 5) {
+  if(chance === 1) {
     let xp = Math.floor((Math.random() * 5) + 1)
     let xpProfile = db.fetch(`xp_${message.author.id}`)
     if(!xpProfile || xpProfile === null || undefined) xpProfile = 0
