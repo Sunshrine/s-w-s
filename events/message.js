@@ -3,30 +3,8 @@ module.exports = async (client, message) => {
   const db = require("quick.db");
   const default_prefix = "&";
   const settings = require("../settings.json");
-
-  client.guilds.cache.forEach(async guild => {
-    let T = client.settings.get(guild.id);
-    if (!T || T === null || undefined) {
-      client.settings.set(guild.id, {
-     toggleStarboard: {
-        name: 'toggleStarboard',
-        type: false,
-        message: ''
-      },
-      toggleWelcome: {
-        name: 'toggleWelcome',
-        type: false,
-        message: ''
-      },
-      toggleAutoMod: {
-        name: 'toggleAutoMod',
-        type: false,
-        message: ''
-      }
-      });
-      console.log(`Added ${guild.name} with ID ${guild.id} to the settings!`);
-    }
-  });
+  
+  
 
   if (message.author.bot) return;
   if (
@@ -112,4 +90,13 @@ module.exports = async (client, message) => {
   if (!command) command = client.commands.get(client.aliases.get(cmd));
 
   if (command) command.run(client, message, args);
+  
+  let chance = Math.floor(Math.random() * 10) + 1
+  
+  if(chance > 5 || chance === 5) {
+    let xp = Math.floor(Math.random() * 5) + 1
+    let xpProfile = db.fetch(`profile_${message.author.id}.xp`)
+    if(!xpProfile || xpProfile === null || undefined) xpProfile = 0
+    db.add(`profile_${message.author.id}`)
+  }
 };

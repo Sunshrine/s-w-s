@@ -19,7 +19,7 @@ module.exports = {
     if(!acknowledgements || acknowledgements === null || undefined) acknowledgements = 'User'
     
     const embed = new MessageEmbed()
-    .setAuthor(message.author.displayAvatarURL(), 'Profile')
+    .setAuthor('Profile', message.author.displayAvatarURL())
     .setColor("ORANGE")
     .setTitle(`${message.author.username}'s Profile`)
     .addFields(
@@ -28,7 +28,7 @@ module.exports = {
       { name: 'Level', value: level, inline: true },
       { name: 'Acknowledgements', value: acknowledgements, inline: true }
     )
-    .setFooter(client.user.displayAvatarURL(), `• ${client.user.username} Profiles`)
+    .setFooter(`• ${client.user.username} Profiles`, client.user.displayAvatarURL())
     
     message.channel.send(embed)
   }
