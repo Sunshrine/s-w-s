@@ -3,8 +3,6 @@ module.exports = async (client, message) => {
   const db = require("quick.db");
   const default_prefix = "&";
   const settings = require("../settings.json");
-  
-  
 
   if (message.author.bot) return;
   if (
