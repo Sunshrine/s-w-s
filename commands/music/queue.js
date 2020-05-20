@@ -1,15 +1,18 @@
 module.exports = {
-  name: 'nowplaying',
-  description: 'Shows what\'s currently playing.',
+  name: 'queue',
+  description: 'Shows the song queue.',
   category: 'music',
-  aliases: [''],
-  usage: '',
+  aliases: ['q'],
   run: async (client, message, args) => {
     
         const serverQueue = client.queue.get(message.guild.id);
 
-if (!serverQueue) return message.channel.send("There is nothing playing.");
-        return message.channel.send(`🎶  **|**  Now Playing: **\`${serverQueue.songs[0].title}\`**`);
+        if (!serverQueue) return message.channel.send("There is nothing playing.");
+        return message.channel.send(`
+__**Song Queue**__
+${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
+**Now Playing: \`${serverQueue.songs[0].title}\`**
+        `);
       
       }
 }
