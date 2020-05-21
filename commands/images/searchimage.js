@@ -20,9 +20,11 @@ module.exports = {
     .setImage(body.urls.regular)
     
     if(body.description !== null) {
+      if(body.description.length > 256) return;
 embed.setTitle(body.description.charAt(0).toUpperCase() + body.description.slice(1))
     } else {
       if(body.alt_description !== null) {
+        if(body.alt_description.length > 256) return;
         embed.setTitle(body.alt_description.charAt(0).toUpperCase() + body.alt_description.slice(1))
       }
     }
@@ -30,6 +32,8 @@ embed.setTitle(body.description.charAt(0).toUpperCase() + body.description.slice
     message.delete()
     message.channel.send(embed)
         })
+    
+    
     
   }
 }
