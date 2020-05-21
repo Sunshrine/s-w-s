@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js'),
-      { get } = require('node-superfetch')
+      fetch = require('node-fetch')
 
 module.exports = {
   name: 'foodimage',
@@ -8,7 +8,9 @@ module.exports = {
   aliases: ['foody'],
   run: async (client, message, args) => {
     
-    const { body } = get('https://api.unsplash.com/photos/random/?client_id=gY5yjtEIgYGefV3T1bf59TY2e7Qwh5CCqmEqkMxb45g&query=foodporn')
+    const { body } = fetch('https://api.unsplash.com/photos/random/?client_id=gY5yjtEIgYGefV3T1bf59TY2e7Qwh5CCqmEqkMxb45g&query=foodporn')        
+        .then(res => res.json())
+        .then(body => {
     
     const embed = new MessageEmbed()
     .setColor("BLUE")
@@ -24,6 +26,7 @@ embed.setTitle(body.description.charAt(0).toUpperCase() + body.description.slice
     
     message.delete()
     message.channel.send(embed)
+        })
     
   }
 }
