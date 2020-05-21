@@ -1,14 +1,17 @@
 const { MessageEmbed } = require('discord.js'),
       fetch = require('node-fetch')
+const encode = require('strict-uri-encode')
 
 module.exports = {
-  name: 'foodimage',
+  name: 'searchimage',
   description: 'Get a image of delicious food!',
   category: 'images',
-  aliases: ['foody'],
+  aliases: ['searchimg'],
   run: async (client, message, args) => {
     
-    const { body } = fetch('https://api.unsplash.com/photos/random/?client_id=gY5yjtEIgYGefV3T1bf59TY2e7Qwh5CCqmEqkMxb45g&query=foodporn')        
+    if(!args.slice(0).join(' ')) return message.reply('please input a query!')
+    
+    const { body } = fetch(`https://api.unsplash.com/photos/random/?client_id=gY5yjtEIgYGefV3T1bf59TY2e7Qwh5CCqmEqkMxb45g&query=${encode(args.slice(0).join(' '))}`)        
         .then(res => res.json())
         .then(body => {
     
