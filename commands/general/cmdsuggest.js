@@ -23,9 +23,7 @@ module.exports = {
         categoriesmsg.react('🧮')
         categoriesmsg.react('🖼️')
         categoriesmsg.react('ℹ️')
-        categoriesmsg.react('🛠️')
-        categoriesmsg.react('🔞')
-        categoriesmsg.react('💰')
+        categoriesmsg.react('🛠️') 
         categoriesmsg.react('⚙️').then(() => {
             categories.setAuthor('React to choose category.')
             categoriesmsg.edit(categories)
@@ -150,30 +148,6 @@ module.exports = {
                 .setDescription('Please type your suggestion for the Mod category.')
                 .setAuthor('You have chosen the Mod category.')
                 category = 'Mod'
-                categoriesmsg.edit(categories)
-                message.channel.awaitMessages(filter2, { max: 1 })
-                .then(collected => {
-                    console.log(`Collected ${collected.first().content}!`)
-                    suggestion = collected.first().content
-                    cmdsuggestion.addField('Category', category, true)
-                    cmdsuggestion.addField('Suggestion Author', message.member, true)
-                    cmdsuggestion.addField('\u200b', '\u200b')
-                    cmdsuggestion.addField('Suggestion', suggestion)
-                    centralserver.send(cmdsuggestion)
-                    collected.first().delete()
-                    categories.setAuthor('Operation success.')
-                    categories.setTitle('✅ Suggestion Sent ✅')
-                    categories.setDescription('Your suggestion has been sent.')
-                    categoriesmsg.edit(categories).then(m => m.delete({ "timeout": 5000 }))
-                })
-            }
-            if(collected.first().emoji.name === '🔞') {
-                categoriesmsg.reactions.removeAll()
-                categories
-                .setTitle('NSFW Category')
-                .setDescription('Please type your suggestion for the NSFW category.')
-                .setAuthor('You have chosen the NSFW category.')
-                category = 'NSFW'
                 categoriesmsg.edit(categories)
                 message.channel.awaitMessages(filter2, { max: 1 })
                 .then(collected => {

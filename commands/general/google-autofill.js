@@ -7,6 +7,8 @@ module.exports = {
     category: 'general',
     usage: '<query>',
     run: async (client, message, args) => {
+      
+      if(!message.channel.nsfw) message.reply('please use this command in a NSFW channel!') 
 
         message.delete()
 
