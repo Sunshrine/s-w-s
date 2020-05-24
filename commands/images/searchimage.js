@@ -10,6 +10,7 @@ module.exports = {
   run: async (client, message, args) => {
     
     if(!args.slice(0).join(' ')) return message.reply('please input a query!')
+    if(!message.channel.nsfw) message.reply('please run this command in a NSFW channel!') 
     
     const { body } = fetch(`https://api.unsplash.com/photos/random/?client_id=gY5yjtEIgYGefV3T1bf59TY2e7Qwh5CCqmEqkMxb45g&query=${encode(args.slice(0).join(' '))}`)        
         .then(res => res.json())

@@ -20,6 +20,8 @@ module.exports = {
       const noinput = lang.youtube_noinput.replace('%prefix', prefix);
       return message.channel.send(noinput);
     }
+        
+        if(!message.channel.nsfw) message.reply('please run this command in a NSFW channel!') 
     const url = `https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=${arguables}&maxResults=1&type=video&key=${process.env.YOUTUBE_KEY}`;
     request(url, (err, response, body) => {
       if (err) {
