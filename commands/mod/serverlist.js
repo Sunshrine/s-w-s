@@ -5,6 +5,10 @@ module.exports = {
   description: "Lists all the servers that the bot is connected to.",
   aliases: ["sl"],
   run: async (client, message, args) => {
+    
+    const settings = require('../../settings.json')
+    
+    if(!settings.owners.includes(message.author.id)) return message.reply('You are not the bot owner!') 
     message.delete();
 
     let m = await message.reply(
