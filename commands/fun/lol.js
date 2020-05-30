@@ -39,8 +39,9 @@ module.exports = {
     } else {
       let instance2 = message.channel.createWebhook(member.username, {
         avatar: member.displayAvatarURL()
+      }).then(instance2 => {
+        instance2.send(arg)
       })
-      
     }
 
   },
