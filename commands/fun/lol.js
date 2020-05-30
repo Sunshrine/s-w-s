@@ -40,7 +40,7 @@ module.exports = {
       let instance2 = message.channel.createWebhook(member.username, {
         avatar: member.displayAvatarURL()
       })
-      instance2.send(arg)
+      
     }
 
   },
