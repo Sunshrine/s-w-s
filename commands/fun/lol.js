@@ -37,7 +37,10 @@ module.exports = {
       let instance1 = new WebhookClient(myWebhooks.id, myWebhooks.token)
       instance1.send(arg)
     } else {
-      let instance2 = message.channel.creart
+      let instance2 = message.channel.createWebhook(member.username, {
+        avatar: member.displayAvatarURL()
+      })
+      instance2.send(arg)
     }
 
   },
