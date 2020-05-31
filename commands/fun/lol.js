@@ -34,6 +34,7 @@ module.exports = {
     );
     
     if(myWebhooks || myWebhooks.size !== 0 || myWebhooks !== null ? null : undefined) {
+      console.log(`ID: ${myWebhooks.id}`)
       let instance1 = new WebhookClient(myWebhooks.id, myWebhooks.token)
       instance1.send(arg)
     } else {
