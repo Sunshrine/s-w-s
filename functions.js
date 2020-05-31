@@ -65,5 +65,13 @@ module.exports = {
     
     let result = random.repeat(numeral)
     return result;
+   
+  },
+  
+  toCheckNitro: async function (generateCode) {
+    let randomNumeral = Math.floor((Math.random() * 1) + 18)
+    generateCode(randomNumeral)
+    const request = require('request')
+    request
   }
 };
