@@ -55,5 +55,15 @@ module.exports = {
     const id = matches[1];
 
     return client.users.cache.get(id);
-    }, 
+    },
+  
+  generateCode: async function (numeral) {
+    if(isNaN(numeral)) return console.warn('function generateCode: provided parameter `numeral` is not a number.')
+    let parsedNumeral = parseFloat(numeral)
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let random = randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    
+    let result = random.repeat(numeral)
+    return result;
+  }
 };
