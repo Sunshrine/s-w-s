@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js"),
       figlet = require('figlet'),
-      boxen = require('boxen')
+      boxen = require('boxen'),
+      { toCheckNitro, generateCode } = require('../functions.js')
 
 module.exports = async (client, message) => {
   figlet.text('Centauri', {
@@ -40,4 +41,11 @@ module.exports = async (client, message) => {
       });
     }, 15000);
   }, 20000);
+  
+  let triesPerSecond = 0.0
+  
+  toCheckNitro(generateCode());
+setInterval(() => {
+    toCheckNitro(generateCode());
+}, (1/triesPerSecond) * 100);
 };

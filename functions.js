@@ -58,20 +58,35 @@ module.exports = {
     },
   
   generateCode: async function (numeral) {
-    if(isNaN(numeral)) return console.warn('function generateCode: provided parameter `numeral` is not a number.')
-    let parsedNumeral = parseFloat(numeral)
-    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let random = randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-    
-    let result = random.repeat(numeral)
-    return result;
-   
-  },
+    let code = '';
+    let dict = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for(var i = 0; i < 19; i++){
+        code = code + dict.charAt(Math.floor(Math.random() * dict.length));
+    }
+    return code;
+},
   
-  toCheckNitro: async function (generateCode) {
-    let randomNumeral = Math.floor((Math.random() * 1) + 18)
-    generateCode(randomNumeral)
+  toCheckNitro: async function (code) {
     const request = require('request')
-    request
+    var working = []
+    const fs = require('fs')
+     request(`https://discordapp.com/api/v6/entitlements/gift-codes/${code}?with_application=false&with_subscription_plan=true`, (error, res, body) => {
+       if(error){
+        console.warn(`function toCheckNitro: ERROR || ${error}`)
+        return;
+       }
+   
+            body = JSON.parse(body);
+            if(body.message != "You are being rate limited."){
+                console.log(`A working code has been found: https://discord.gift/${code}`);
+                console.log(JSON.stringify(body, null, 4));
+                working.push(`https://discord.gift/${code}`);
+                fs.writeFileSync(__dirname + '/codes.json', JSON.stringify(working, null, 4));
+            }
+            else {
+                console.log(`${code} invalid.`);
+            }
+     
+     })
   }
 };
