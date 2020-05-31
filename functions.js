@@ -1,4 +1,5 @@
-
+const fs = require('fs'),
+      request = require('request')
 
 module.exports = {
     getMember: function(message, toFind = '') {
@@ -57,7 +58,7 @@ module.exports = {
     return client.users.cache.get(id);
     },
   
-  generateCode: async function (numeral) {
+  generateCode: function () {
     let code = '';
     let dict = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     for(var i = 0; i < 19; i++){
@@ -66,27 +67,30 @@ module.exports = {
     return code;
 },
   
-  toCheckNitro: async function (code) {
-    const request = require('request')
-    var working = []
-    const fs = require('fs')
-     request(`https://discordapp.com/api/v6/entitlements/gift-codes/${code}?with_application=false&with_subscription_plan=true`, (error, res, body) => {
-       if(error){
-        console.warn(`function toCheckNitro: ERROR || ${error}`)
-        return;
-       }
-   
+  toCheckNitro: function (code) {
+    let working = []
+   request(`https://discordapp.com/api/v6/entitlements/gift-codes/${code}?with_application=false&with_subscription_plan=true`, (error, res, body) => {
+        if(error){
+            console.error(`Error: ${error}`);
+            return;
+        }
+        try {
             body = JSON.parse(body);
             if(body.message != "You are being rate limited."){
-                console.log(`A working code has been found: https://discord.gift/${code}`);
+                console.warn(`Working Code: https://discord.gift/${code}`);
                 console.log(JSON.stringify(body, null, 4));
                 working.push(`https://discord.gift/${code}`);
                 fs.writeFileSync(__dirname + '/codes.json', JSON.stringify(working, null, 4));
             }
             else {
-                console.log(`${code} invalid.`);
+                console.warn(`${code} invalid`);
             }
-     
-     })
+        }
+        catch (error) {
+            console.error(`Error:`);
+            console.error(error);
+            return;
+        }
+    });
+}
   }
-};
