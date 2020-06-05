@@ -7,10 +7,10 @@ module.exports = {
   usage: "[mention] || [attachment]",
   run: async (client, message, args) => {
     let attachment =
-      message.mentions.users.first() || message.author.displayAvatarURL();
+      message.mentions.users.first() || message.author.displayAvatarURL({ format: 'png' });
     if (message.mentions.users.array()[0]) {
       let user = message.mentions.users.array[0];
-      attachment = user.displayAvatarURL();
+      attachment = user.displayAvatarURL({ format: 'png' });
     }
 
     let msg = await message.channel.send("Generating...");
