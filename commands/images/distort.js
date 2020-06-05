@@ -9,7 +9,7 @@ module.exports = {
     let attachment =
       message.mentions.users.first() || message.author.displayAvatarURL({ format: 'png' });
     if (message.mentions.users.array()[0]) {
-      let user = message.mentions.users.array[0];
+            let user = message.mentions.users.array()[0]
       attachment = user.displayAvatarURL({ format: 'png' });
     }
 
