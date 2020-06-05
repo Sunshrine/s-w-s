@@ -54,10 +54,11 @@ module.exports = {
             return message.author.send(embed).catch(err => {
               if(err) {
                 sembed.setDescription('**Failed to send commands in DMs, sending here instead...**')
-                message.channel.send(sembed)
+                let x = message.channel.send(sembed)
                 setTimeout(() => {
-                  message.channel.send()
-                })
+                  x.delete()
+                  message.channel.send(embed)
+                }, 2000)
                            
               }
             })
