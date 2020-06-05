@@ -51,7 +51,16 @@ module.exports = {
           })
    
 
-            return message.author.send(embed)
+            return message.author.send(embed).catch(err => {
+              if(err) {
+                sembed.setDescription('**Failed to send commands in DMs, sending here instead...**')
+                message.channel.send(sembed)
+                setTimeout(() => {
+                  message.channel.send()
+                })
+                           
+              }
+            })
         } else {
           
                   let botPrefix;
