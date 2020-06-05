@@ -1,9 +1,9 @@
 const Discord = require("discord.js")
 
 module.exports = {
-  name: "gay",
+  name: "invert",
   category: "images",
-  description: "Show your pride!",
+  description: "Invert avatars!",
   usage: "[mention]",
   run: async (client, message, args) => {
     let attachment =
@@ -19,7 +19,7 @@ module.exports = {
       const ameClient = require("amethyste-api");
       const ameApi = new ameClient(process.env.AMETHYSTE_KEY);
       ameApi
-        .generate("gay", {
+        .generate("invert", {
           url: attachment
         })
         .then(image => {
