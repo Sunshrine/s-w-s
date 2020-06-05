@@ -1,5 +1,5 @@
 const Discord = require("discord.js"),
-  { get } = require("node-superfetch");
+  { post } = require("node-superfetch");
 const token = process.env.AMETHYSTE_KEY;
 
 module.exports = {
@@ -10,16 +10,16 @@ module.exports = {
   run: async (client, message, args) => {
     let attachment =
       message.mentions.users.first() ||
-      message.author.displayAvatarURL({ dynamic: true });
+      message.author.displayAvatarURL();
     if (message.mentions.users.array()[0]) {
       let user = message.mentions.users.array[0];
-      attachment = user.displayAvatarURL({ dynamic: true });
+      attachment = user.displayAvatarURL();
     }
 
     let msg = await message.channel.send("Generating...");
 
     try {
-      let { body } = await get("https://v1.api.amethyste.moe/generate/gay")
+      let { body } = await post("https://v1.api.amethyste.moe/generate/gay")
         .query({ url: attachment })
         .set("Authorization", `Bearer ${token}`);
       let s = new Discord.MessageAttachment(body, "tobecontinued.png");
