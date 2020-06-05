@@ -1,7 +1,6 @@
 const Discord = require('discord.js'),
-      fetch = require('node-fetch')
-const AmeClient = require('amethyste-api');
-const AmeAPI = new AmeClient(process.env.AMETHYSTE_KEY)
+      { get } = require('node-superfetch')
+const token = 'Njg1MzcxOTY2MDIyMzUyOTI4.SoTVDCamJwb0GZ1gpipyItkkg2bWtWs8ZHiaWQbP1gc'
 
 module.exports = {
         name: "tobecontinued",
@@ -20,8 +19,10 @@ module.exports = {
                   let msg = await message.channel.send('Generating...')
     
     try {
-        let buffer = await AmeAPI.generate("tobecontinued", { url: attachment });
-        let s = new Discord.MessageAttachment(buffer, "tobecontinued.png");
+        let { body } = await get('https://emilia-api.glitch.me/api/to-be-continued')
+        .query({ image: attachment })
+         .set("Authorization", `Bearer ${token}`);
+        let s = new Discord.MessageAttachment(body, "tobecontinued.png");
       message.delete()
         msg.delete({ timeout: 5000 });
         message.channel.send(s);
