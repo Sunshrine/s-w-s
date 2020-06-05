@@ -52,9 +52,9 @@ module.exports = {
    
 
             return message.author.send(embed).catch(err => {
-              if(err) {
+              if(err) async () => {
                 sembed.setDescription('**Failed to send commands in DMs, sending here instead...**')
-                let x = message.channel.send(sembed)
+                let x = await message.channel.send(sembed)
                 setTimeout(() => {
                   x.delete()
                   message.channel.send(embed)
