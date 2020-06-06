@@ -22,18 +22,23 @@ module.exports = {
       dailystatus.setColor('RED')
       dailystatus.setTitle('Reward already collected!')
       dailystatus.setDescription(`${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`)
-    } else {
       
-      let coin = client.emojis.cache.get(718780405481734175)
+      message.channel.send(dailystatus)
+      
+    } else {      
+      
+      let coin = client.emojis.cache.get('718780405481734175')
       dailystatus.setColor('GREEN')
       dailystatus.setTitle('Reward collected!')
       dailystatus.setDescription(`${message.member}, successfully collected ${coin} ${amount}!`)
       
-      db.add(`coinBalance`)
+      db.set(`lastDaily_${message.author.id}`, Date.now())
+      db.add(`coinBalance_${message.author.id}`, amount)
+      
+      message.channel.send(dailystatus)
     }
     
-    
-    
+
     
   }
 }
