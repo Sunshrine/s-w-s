@@ -28,7 +28,9 @@ module.exports = async (client, message) => {
   if (!message.guild) return;
 
   if (message.content.includes(message.mentions.members.first())) {
-    let mentioned = client.afk.get(message.mentions.users.first().id);
+    let o = message.mentions.users.first()
+    let id = o.id
+    let mentioned = client.afk.get(id);
     if (mentioned) {
       let afkEmbed = new MessageEmbed()
         .setColor("ORANGE")
