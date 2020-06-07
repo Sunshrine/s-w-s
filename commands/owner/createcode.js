@@ -1,6 +1,7 @@
 const { randomKey } = require("../../functions.js"),
       db = require('quick.db'),
-      items = 
+      fs = require('fs')
+const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
 
 module.exports = {
   name: "createcode",
@@ -25,11 +26,11 @@ module.exports = {
 }
     
     function pickRandomQuestion(){
-        var obj_keys = Object.keys(window.questionnaire);
-        var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
-        window.selectedquestion = window.questionnaire[ran_key];
-        console.log(window.selectedquestion);
-        console.log(window.questionnaire);
+        var obj_keys = Object.keys(items);
+        var ran_key = obj_keys[Math.floor(Math.random() * obj_keys.length)];
+        items.selecteditem = items[ran_key];
+        console.log(items.selecteditem);
+        console.log(items);
 }
   
     let code = makeid(15)
