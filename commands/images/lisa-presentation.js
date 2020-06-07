@@ -15,7 +15,7 @@ let userdata = db.fetch(`userData_${message.author.id}`)
     if(!userdata || userdata === null || userdata === undefined) {
       db.set(`userData_${message.author.id}`, { indexed: {
         "premium": 'none',
-        acknowledgements: 'none'
+        "acknowledgements": 'none'
       }, global: {
         "username": message.author.username,
         "avatarlink": message.author.avatarURL({ dynamic: true }),
@@ -24,7 +24,7 @@ let userdata = db.fetch(`userData_${message.author.id}`)
       }})
     }
     
-    let premium = db.fetch(`userData_${message.author.id}.premium`)
+    let premium = db.fetch(`userData_${message.author.id}.indexed.premium`)
     
     if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
     
