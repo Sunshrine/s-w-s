@@ -100,6 +100,7 @@ let categories = []; // Lets define categories as an empty array so we can add t
             } else {
                       db.subtract(`coinBalance_${message.author.id}`, parseInt(itemPrice))
                       message.channel.send('**You bought ' + itemName + '!**');
+              db.push(`userData_${message.author.id}.inventory`, itemName)
             }
           }
 
