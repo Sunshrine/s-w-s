@@ -13,7 +13,8 @@ module.exports = {
     if (!afklist) {
         let construct = {
             id: message.author.id,
-            reason: reason
+            reason: reason,
+          username: message.author.username
         };
 
         client.afk.set(message.author.id, construct);

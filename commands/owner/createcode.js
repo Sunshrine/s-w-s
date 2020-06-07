@@ -12,8 +12,18 @@ module.exports = {
       return message.channel
         .send("You're not the bot the owner!")
         .then(m => m.delete({ timeout: 1500 }));
+    
+    function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
   
-    let code = randomKey(15)
+    let code = makeid(15)
     
     db.set(`code-${code}`, { redeemed: 'unredeemed', type: 'coins', amount: '1000' })
     
