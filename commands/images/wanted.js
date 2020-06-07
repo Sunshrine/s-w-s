@@ -1,6 +1,6 @@
 const token =
   "Njg1MzcxOTY2MDIyMzUyOTI4.SoTVDCamJwb0GZ1gpipyItkkg2bWtWs8ZHiaWQbP1gc";
-const premium = require("../../premiumusers.json");
+const db = require('quick.db')
 
 module.exports = {
   name: "wanted",

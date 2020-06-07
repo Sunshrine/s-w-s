@@ -1,4 +1,4 @@
-const premium = require('../../premiumusers.json')
+const db = require('quick.db')
 const fetch = require('node-fetch'),
       Discord = require('discord.js')
 
@@ -10,7 +10,22 @@ module.exports = {
   category: 'images',
   run: async (client, message, args) => {
     
-    if(!premium.users.includes(message.author.id)) return message.reply('you don\'t have premium!').then(m => m.delete({ "timeout": 1500 }))
+let userdata = db.fetch(`userData_${message.author.id}`)
+    if(!userdata || userdata === null || userdata === undefined) {
+      db.set(`userData_${message.author.id}`, { indexed: {
+        "premium": 'none',
+        acknowledgements: 'none'
+      }, global: {
+        "username": message.author.username,
+        "avatarlink": message.author.avatarURL({ dynamic: true }),
+        "id": message.author.id,
+        "tag": message.author.tag
+      }})
+    }
+    
+    let premium = db.fetch(`userData_${message.author.id}.premium`)
+    
+    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
     
     let comment = args.slice(0).join(" ")
     if(!comment) return message.reply('**please input text!**')

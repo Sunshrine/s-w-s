@@ -11,7 +11,7 @@ module.exports = {
   usage: "<text>",
   category: "fun",
   run: async (client, message, args) => {
-    let userdata = db.fetch(`userData_${message.author.id}`)
+let userdata = db.fetch(`userData_${message.author.id}`)
     if(!userdata || userdata === null || userdata === undefined) {
       db.set(`userData_${message.author.id}`, { indexed: {
         "premium": 'none',
@@ -23,6 +23,10 @@ module.exports = {
         "tag": message.author.tag
       }})
     }
+    
+    let premium = db.fetch(`userData_${message.author.id}.premium`)
+    
+    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
 
     let text = args.slice(0).join(" ");
 

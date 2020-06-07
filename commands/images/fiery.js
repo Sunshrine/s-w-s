@@ -10,7 +10,7 @@ module.exports = {
 
         message.delete()
 
-        let userdata = db.fetch(`userData_${message.author.id}`)
+let userdata = db.fetch(`userData_${message.author.id}`)
     if(!userdata || userdata === null || userdata === undefined) {
       db.set(`userData_${message.author.id}`, { indexed: {
         "premium": 'none',
@@ -22,6 +22,10 @@ module.exports = {
         "tag": message.author.tag
       }})
     }
+    
+    let premium = db.fetch(`userData_${message.author.id}.premium`)
+    
+    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
 
     let target = message.mentions.users.first() || message.guild.members.cache.get(args[0]) || message.author;
     if(target === message.guild.members.cache.get(args[0])) {
