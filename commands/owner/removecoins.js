@@ -23,6 +23,8 @@ module.exports = {
     if(x > bal) return message.reply('they have way less than you want to remove!')
     db.subtract(`coinBalance_${user.id}`, x)
     
+    let newbal = await db.fetch(`coinBalance_${user.id}`)
+    
     let coin = client.emojis.cache.get('718780405481734175')
 
     let moneyEmbed = new MessageEmbed()
