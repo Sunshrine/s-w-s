@@ -27,6 +27,10 @@ module.exports = {
     
     db.set(`code-${code}`, { redeemed: 'unredeemed', type: 'coins', amount: '1000' })
     
+    let code2 = makeid(15)
+    
+    db.set(`code-${code}`, { redeemed: 'unredeemed', type: 'coins', amount:  })
+    
     message.author.send(`Created code ${code}`)
     
   }

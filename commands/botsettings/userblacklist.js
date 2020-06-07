@@ -35,7 +35,7 @@ module.exports = {
     
     if(client.blacklistedUsers.has(user.id)) {
       let X = client.blacklistedUsers.get(user.id)
-      if(settings.owners.includes(X.operator) && !settings.owners.has(message.author.id)) return message.reply(`**${user} was blacklisted by a Centauri Bot owner, meaning no one except Centauri Bot owners can remove him.`)
+      if(settings.owners.includes(X.operator) && !settings.owners.ha(message.author.id)) return message.reply(`**${user} was blacklisted by a Centauri Bot owner, meaning no one except Centauri Bot owners can remove him.`)
     }
     
     if(client.blacklistedUsers.has(user.id) && user.id === message.author.id) return message.reply('**you cannot remove yourselve.**')
