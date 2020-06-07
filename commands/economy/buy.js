@@ -4,11 +4,11 @@ const { MessageEmbed } = require('discord.js')
 const db = require('quick.db')
 
 module.exports = {
-  name: '',
-  description: '',
-  category: '',
-  aliases: [''],
-  usage: '',
+  name: 'buy',
+  description: 'Buy an item from the Centashop!',
+  category: 'economy',
+  aliases: ['purchase'],
+  usage: '[item name]',
   run: async (client, message, args) => {
 
 let categories = []; // Lets define categories as an empty array so we can add to it.
