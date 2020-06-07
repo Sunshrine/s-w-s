@@ -58,5 +58,9 @@ module.exports = {
     return client.users.cache.get(id);
     },
   
+  randomKey: async function () {
+    
+    
+  }
 
   }
