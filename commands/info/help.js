@@ -47,14 +47,15 @@ module.exports = {
                   embed.addField(` ${capitalise} [${dir.size}] - `, dir.map(c => `\`${c.name}\``).join(" "))
                 } catch (e) {
                     console.log(e)
+                  
                 }
           })
    
 
             return message.author.send(embed).catch(err => {
-              if(err) async () => {
+              if(err) {
                 sembed.setDescription('**Failed to send commands in DMs, sending here instead...**')
-                let x = await message.channel.send(sembed)
+                let x = message.channel.send(sembed)
                 setTimeout(() => {
                   x.delete()
                   message.channel.send(embed)
