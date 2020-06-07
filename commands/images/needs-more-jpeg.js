@@ -4,14 +4,18 @@ const request = require('node-superfetch')
 module.exports = {
   name: 'needs-more-jpeg',
 	aliases: ['jpeg', 'jpegify'],
-	category: 'edit-image',
+	category: 'images',
   usage: '[user | attachment]',
 	description: 'Draws an image or a user\'s avatar as a low quality JPEG.',
   run: async (client, message, args) => {
     
     let quality = parseInt(args[0]) 
     
-    let image = message.mentions.users.first().displayAvatarURL({ format: 'png', size: 512 }) || message.attachments.first() ? message.attachments.first().proxyURL : null || message.author.displayAvatarURL({ format: 'png', size: 512 })
+    let image = message.mentions.users.first() || message.attachments.first() ? message.attachments.first().proxyURL : null || message.author.displayAvatarURL({ format: 'png', size: 512 })
+    if(image === message.mentions.users.first()) {
+      let user = message.mentions.users.first()
+      image = user.displayAvatarURL({ format: 'png', size: 512 })
+    }
     
     if(message.mentions.users.array[0]) quality = parseInt(args[1])
     if(isNaN(quality)) return message.reply(`${args[1]} is not a valid number.`)
