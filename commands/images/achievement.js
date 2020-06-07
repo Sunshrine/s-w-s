@@ -26,6 +26,8 @@ module.exports = {
     
     let premium = db.fetch(`userData_${message.author.id}.premium`)
     
+    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
+    
 
     
 
