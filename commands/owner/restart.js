@@ -1,8 +1,8 @@
 module.exports = {
-        name: "shutdown",
-        description: "Shuts down the bot!",
+        name: "restart",
+        description: "Restarts the bot!",
         category: "owner",
-        aliases: ["botstop", "off", "stop", "end"],
+        aliases: ["botrestart", "refresh", "reload", "res"],
         run: async (client, message, args) => {
 
     if(message.author.id != "685371966022352928") return message.channel.send("You're not the bot the owner!").then(m => m.delete({ "timeout": 1500 }))

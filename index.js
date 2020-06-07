@@ -8,7 +8,7 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`https://sunshrine-centauri.glitch.me`)
+  http.get(`http://sunshrine-centauri.glitch.me`)
 }, 280000);
 
 const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
