@@ -1,6 +1,6 @@
 const { createCanvas, loadImage, registerFont } = require("canvas"),
   { MessageEmbed, MessageAttachment } = require("discord.js"),
-  premium = require("../../premiumusers.json");
+      db = require('quick.db')    
 registerFont("/app/HollywoodStar.otf", { family: "Hollywood Star" });
 
 module.exports = {
@@ -11,10 +11,18 @@ module.exports = {
   usage: "<text>",
   category: "fun",
   run: async (client, message, args) => {
-    if (!premium.users.includes(message.author.id))
-      return message
-        .reply("you don't have premium!")
-        .then(m => m.delete({ timeout: 1500 }));
+    let userdata = db.fetch(`userData_${message.author.id}`)
+    if(!userdata || userdata === null || userdata === undefined) {
+      db.set(`userData_${message.author.id}`, { indexed: {
+        "premium": 'none',
+        acknowledgements: 'none'
+      }, global: {
+        "username": message.author.username,
+        "avatarlink": message.author.avatarURL({ dynamic: true }),
+        "id": message.author.id,
+        "tag": message.author.tag
+      }})
+    }
 
     let text = args.slice(0).join(" ");
 
