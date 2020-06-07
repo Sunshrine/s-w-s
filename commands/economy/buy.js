@@ -1,7 +1,7 @@
 const fs = require('fs');
 const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
 const { MessageEmbed } = require('discord.js')
-
+const db = require('quick.db')
 
 module.exports = {
   name: '',
@@ -79,23 +79,33 @@ let categories = []; // Lets define categories as an empty array so we can add t
         }
 
         // Now, lets check if they have enough money.
-        db.fetch(`coinBalance_${message.author.id}`).then((i) => { // Lets fix a few errors - If you use the unique guild thing, do this.
-            if (i.money <= itemPrice) { // It's supposed to be like this instead...
-
+        let coinBalance = db.fetch(`coinBalance_${message.author.id}`)
+        if(!coinBalance || coinBalance === null || coinBalance === undefined) coinBalance = 0// Lets fix a few errors - If you use the unique guild thing, do this.
+            if (coinBalance < itemPrice) { // It's supposed to be like this instead...
                 return message.channel.send(`**You don't have enough money for this item.**`);
-            }
-
-            economy.updateBalance(message.author.id + message.guild.id, parseInt(`-${itemPrice}`)).then((i) => {
-
-                message.channel.send('**You bought ' + itemName + '!**');
-
-                // You can have IF statements here to run something when they buy an item.
-                if (itemName === 'Helper Role') {
-                    message.guild.members.get(message.author.id).addRole(message.guild.roles.find("name", "Helper")); // For example, when they buy the helper role it will give them the helper role.
+            } else {
+              if(itemName === 'Centapremium') {
+                    let premium = db.fetch(`userData_${message.author.id}.indexed.premium`)
+    
+                    if(!premium || premium === null || premium === undefined) premium = 'none'
+                if(premium === 'none') {
+                      db.subtract(`coinBalance_${message.author.id}`, parseInt(itemPrice))
+                      message.channel.send('**You bought ' + itemName + '!**');
+                      db.set(`userData_${message.author.id}.indexed.premium`, 'Unlimited')
+                      message.channel.send('Added premium to user!')
                 }
+    
+                if(premium !== null || premium !== undefined || premium !== 'none') return message.reply('you  already has premium!')
+              
+            } else {
+                      db.subtract(`coinBalance_${message.author.id}`, parseInt(itemPrice))
+                      message.channel.send('**You bought ' + itemName + '!**');
+            }
+          }
 
-            })
 
-        })
+
+
+       
   }
 }

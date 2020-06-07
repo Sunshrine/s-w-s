@@ -1,5 +1,5 @@
-    "name:" :""{
-  "Pickle": {
+{
+ "Pickle": {
     "name": "Pickle",
     "type": "Fun",
     "price": "100",
@@ -29,9 +29,10 @@
     "price": "50",
     "description": "A WILD BUCKET OF KFC APPEARED!"
   },
-  "C
-    nnamet: "Centapremium",
+  "Centapremium":{
+    "name": "Centapremium",
     "type": "Bot Premium",
-    "price": "1000000"apremium":me"
-  : }
-}:
+    "price": "1000000",
+    "description": "THIS IS CENTAURI BOT PREMIUM!!!!!!!!!!"
+  }
+}
