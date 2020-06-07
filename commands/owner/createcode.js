@@ -1,5 +1,6 @@
 const { randomKey } = require("../../functions.js"),
-      db = require('quick.db')
+      db = require('quick.db'),
+      items = 
 
 module.exports = {
   name: "createcode",
@@ -21,6 +22,14 @@ module.exports = {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
    }
    return result;
+}
+    
+    function pickRandomQuestion(){
+        var obj_keys = Object.keys(window.questionnaire);
+        var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
+        window.selectedquestion = window.questionnaire[ran_key];
+        console.log(window.selectedquestion);
+        console.log(window.questionnaire);
 }
   
     let code = makeid(15)
