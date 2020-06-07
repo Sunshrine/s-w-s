@@ -1,7 +1,6 @@
 const token =
   "Njg1MzcxOTY2MDIyMzUyOTI4.SoTVDCamJwb0GZ1gpipyItkkg2bWtWs8ZHiaWQbP1gc";
-const db = require('quick
-      ')
+const db = require('quick.db')
 
 module.exports = {
   name: "achievement",
@@ -11,11 +10,21 @@ module.exports = {
   aliases: ["achieve"],
   run: async (client, message, args) => {
     message.delete();
-
-    if (!premium.users.includes(message.author.id))
-      return message
-        .reply("you don't have premium!")
-        .then(m => m.delete({ timeout: 1500 }));
+    
+    let userdata = db.fetch(`userData_${message.author.id}`)
+      db.set(`userData_${message.author.id}`, 'indexed' = {
+        premium: 'none',
+        acknowledgements: 'none'
+      }, global = {
+        username: message.author.username,
+        avatarlink: message.author.avatarURL({ dynamic: true }),
+        id: message.author.id,
+        tag: message.author.tag
+      }).then(() => {
+        let data = db.fetch(`userData_${message.author.id}`)
+        console.log(data.indexed + '||' + data.global)
+      })
+    
 
     let target = message.author;
     let comment = args.slice(0).join(" ");
@@ -35,4 +44,4 @@ module.exports = {
 
     message.channel.send(`${target}`, attachment);
   }
-};
+}
