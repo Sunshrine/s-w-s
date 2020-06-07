@@ -8,15 +8,15 @@ module.exports = {
   category: 'economy',
   run: async (client, message, args) => {
     
-    let check1 = db.fetch(`codes-${args[0]}`)
-    if(!check1 || !check1.length) return message.reply('that is an invalid code.')
+    let check1 = db.fetch(`code-${args[0]}`)
+    if(!check1 || check1 === null || undefined) return message.reply('that is an invalid code.')
     
-    let check2 = db.fetch(`codes-${args[0]}.redeemed`)
+    let check2 = db.fetch(`code-${args[0]}.redeemed`)
     if(check2 === 'redeemed' && check2 !== 'unredeemed') return message.reply('sorry, that code is already redeemed.')
     
-    let typecheck = db.fetch(`codes-${args[0]}.type`)
+    let typecheck = db.fetch(`code-${args[0]}.type`)
     if(typecheck === 'coins') {
-      let coincheck = db.fetch(`codes-${args[0]}.amount`)
+      let coincheck = db.fetch(`code-${args[0]}.amount`)
       if(!coincheck || !coincheck.length) coincheck = 250
       
       db.add(`coinBalance_${message.author.id}`, coincheck)
@@ -26,6 +26,8 @@ module.exports = {
       .setDescription(`You have gained a prize of <:centacoin:718780405481734175> ${coincheck}!`)
       
       message.channel.send(coinembed)
+      
+      db.set(`code-${args[0]}.redeemed`, 'redeemed')
     }
   }
 }
