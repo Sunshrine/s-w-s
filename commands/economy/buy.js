@@ -38,7 +38,7 @@ let categories = []; // Lets define categories as an empty array so we can add t
                 for (var c in items) { // This runs off of all commands
                     if (categories[i] === items[c].type) {
 
-                        tempDesc += `${items[c].name} - $${items[c].price} - ${items[c].desc}\n`; // Remember that \n means newline
+                        tempDesc += `${items[c].name} - $${items[c].price} - ${items[c].description}\n`; // Remember that \n means newline
 
                     }
 

@@ -12,11 +12,14 @@ module.exports = {
     try {
         let sx = await message.channel.send("<a:loading:719121979319255052> Attempting a restart...").then (() => {
        setTimeout(() => { 
-         message.channel.send('Restarted.')
+         sx.react('✅')
        }, 10000)
         })
          .then(() => {
-       process.exit(1);
+       process.exit(1)
+           .then(() => {
+         sx.edit('<:success:719123112964128830> Successfully restarted bot.')
+       })
 })
         
     } catch(e) {

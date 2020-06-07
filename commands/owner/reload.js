@@ -20,6 +20,7 @@ module.exports = {
         client.commands.set(commandName, pull)
     } catch(e) {
         return message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``).then(m => m.delete({ "timeout": 1500 }))
+      console.log(e)
     }
 
     message.channel.send(`The command \`${args[0].toUpperCase()}\` has been reloaded!`).then(m => m.delete({ "timeout": 1500 }))
