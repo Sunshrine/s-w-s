@@ -11,7 +11,9 @@ module.exports = {
     
     if(!args[0]) {
       let inventory = db.fetch(`userData_${message.author.id}.inventory`)
+      console.log(inventory)
       if(!inventory || inventory === null || inventory === undefined) inventory = 'No items bought.'
+      if(!Array.isArray(inventory) && !inventory.length) inventory = 'No items bought.'
       const embed1 = new MessageEmbed()
       .setTitle(`Your Inventory || ${message.author.tag}`)
       .setDescription(`Your Items`)
