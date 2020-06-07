@@ -49,6 +49,8 @@ module.exports = {
         );
 
       message.channel.send(premiumembed);
+        
+        db.set(`code-${args[0]}.redeemed`, "redeemed");
       }
     }
   }
