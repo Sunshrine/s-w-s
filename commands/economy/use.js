@@ -21,7 +21,7 @@ module.exports = {
       message.channel.send(embed1)
     } else {
       let inventory = db.get(`userData_${message.author.id}.inventory`)
-      if(!inventory.toLowerCase().includes(args[0])) return message.reply(`uhmm.. either ${args[0]} is not an item or you don't have it.`)
+      if(!inventory.includes(args[0])) return message.reply(`uhmm.. either ${args[0]} is not an item or you don't have it.`)
       
       Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
