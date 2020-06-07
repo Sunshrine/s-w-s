@@ -58,9 +58,18 @@ module.exports = {
     return client.users.cache.get(id);
     },
   
-  randomKey: async function () {
+  randomKey: async function (amount) {
+    let x = typeof(amount) === 'number' &&
+            isFinite(amount) &&
+            Math.round(amount) === amount;
     
+    if(x === false) throw { name: 'InvalidParameter', reason: 'Parameter given is not a number.' }
     
+    let r = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "&", "^", "(", ")", "%", "$", "#", "@", "!", "[", "]"]
+    let r1 = r[Math.floor(Math.random() * r.length)]
+    
+    let rdata = r1.repeat(parseInt(x))
+    return rdata
   }
 
   }

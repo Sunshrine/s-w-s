@@ -3,19 +3,23 @@ const db = require("quick.db"),
   settings = require("../../settings.json");
 
 module.exports = {
-  name: "",
-  description: "",
-  category: "",
-  aliases: [""],
-  usage: "",
+  name: "addcoins",
+  description: "Add coins to yourself or a user.",
+  category: "owner",
+  aliases: ["ac"],
+  usage: "[user]",
   run: async (client, message, args) => {
     if (!settings.includes(message.author.id))
       return message.reply("you are not the bot owner!");
 
     let user = message.mentions.members.first() || message.author;
+    let x;
+    if(message.mentions.members.array()[0]) {
+      x = args[1]
+    } else x = args[0]
 
-    if (isNaN(args[1])) return message.reply();
-    db.add(`coinBalance_${user.id}`, args[1]);
+    if (isNaN(x)) return message.reply();
+    db.add(`coinBalance_${user.id}`, x);
     let bal = await db.fetch(`coinBalance_${user.id}`);
     
     let coin = client.emojis.cache.get('718780405481734175')
