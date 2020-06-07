@@ -25,7 +25,7 @@ let userdata = db.fetch(`userData_${message.author.id}`)
     
     let premium = db.fetch(`userData_${message.author.id}.indexed.premium`)
     
-    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
+    if(!premium || premium === null || premium === undefined || premium === 'none') return message.reply('**you don\'t have premium!**')
     
     let comment = args.slice(0).join(" ")
     if(!comment) return message.reply('**please input text!**')

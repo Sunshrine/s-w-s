@@ -26,11 +26,11 @@ module.exports = {
       }})
     }
     
-    let premium = db.fetch(`userData_${message.author.id}.indexed.premium`)
+    let premium = db.fetch(`userData_${user.id}.indexed.premium`)
     
     if(!premium || premium === null || premium === undefined) premium = 'none'
     
-    let acknowledgements = db.fetch(`userData_${message.author.id}.indexed.acknowlegdements`)
+    let acknowledgements = db.fetch(`userData_${user.id}.indexed.acknowlegdements`)
     
     if(!acknowledgements || acknowledgements === null || acknowledgements === undefined) acknowledgements = 'none'
     

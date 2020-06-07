@@ -25,7 +25,7 @@ let userdata = db.fetch(`userData_${message.author.id}`)
     
     let premium = db.fetch(`userData_${message.author.id}.indexed.premium`)
     
-    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
+    if(!premium || premium === null || premium === undefined || premium === 'none') return message.reply('**you don\'t have premium!**')
 
     let target = message.mentions.users.first() || message.guild.members.cache.get(args[0]) || message.author;
     if(target === message.guild.members.cache.get(args[0])) {

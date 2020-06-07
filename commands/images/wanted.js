@@ -25,7 +25,7 @@ module.exports = {
     
     let premium = db.fetch(`userData_${message.author.id}.indexed.premium`)
     
-    if(!premium || premium === null || premium === undefined) return message.reply('**you don\'t have premium!**')
+    if(!premium || premium === null || premium === undefined || premium === 'none') return message.reply('**you don\'t have premium!**')
 
     let target =
       message.mentions.users.first() ||
