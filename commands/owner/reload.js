@@ -5,24 +5,26 @@ module.exports = {
         aliases: ["creload"],
         run: async (client, message, args) => {
 
-            message.delete()
-
     if(message.author.id != "685371966022352928") return message.channel.send("You're not the bot the owner!").then(m => m.delete({ "timeout": 1500 }))
 
-    if(!args[0]) return message.channel.send("Please provide a command to reload!").then(m => m.delete({ "timeout": 1500 }))
+		const commandName = args[0].toLowerCase();
+		const command = message.client.commands.get(commandName)
+			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-    let commandName = args[0].toLowerCase()
+		if (!command) {
+			return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
+		}
 
-    try {
-        delete require.cache[require.resolve(`./${commandName}.js`)] // usage !reload <name>
-        client.commands.delete(commandName)
-        const pull = require(`./${commandName}.js`)
-        client.commands.set(commandName, pull)
-    } catch(e) {
-        message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``).then(m => m.delete({ "timeout": 1500 }))
-        return console.log(e)
-    }
+		delete require.cache[require.resolve(`./${command.name}.js`)];
 
-    message.channel.send(`The command \`${args[0].toUpperCase()}\` has been reloaded!`).then(m => m.delete({ "timeout": 1500 }))
+		try {
+			const newCommand = require(`./${command.name}.js`);
+			message.client.commands.set(newCommand.name, newCommand);
+			message.channel.send(`Command \`${command.name}\` was reloaded!`);
+		} catch (error) {
+			console.log(error);
+			message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
+		}
+          
         }
     }
