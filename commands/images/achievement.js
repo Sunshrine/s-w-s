@@ -12,18 +12,21 @@ module.exports = {
     message.delete();
     
     let userdata = db.fetch(`userData_${message.author.id}`)
-      db.set(`userData_${message.author.id}`, 'indexed' = {
-        premium: 'none',
+    if(!userdata || userdata === null || userdata === undefined) {
+      db.set(`userData_${message.author.id}`, { indexed: {
+        "premium": 'none',
         acknowledgements: 'none'
-      }, global = {
-        username: message.author.username,
-        avatarlink: message.author.avatarURL({ dynamic: true }),
-        id: message.author.id,
-        tag: message.author.tag
-      }).then(() => {
-        let data = db.fetch(`userData_${message.author.id}`)
-        console.log(data.indexed + '||' + data.global)
-      })
+      }, global: {
+        "username": message.author.username,
+        "avatarlink": message.author.avatarURL({ dynamic: true }),
+        "id": message.author.id,
+        "tag": message.author.tag
+      }})
+    }
+    
+    let premium = db.fetch(`userData_${message.author.id}.premium`)
+    
+
     
 
     let target = message.author;
