@@ -56,11 +56,8 @@ module.exports = {
               if(err) {
                 sembed.setDescription('**Failed to send commands in DMs, sending here instead...**')
                 let x = message.channel.send(sembed)
-                setTimeout(() => {
-                  x.delete()
                   message.channel.send(embed)
-                }, 2000)
-                           
+                x.delete()
               }
             })
         } else {
