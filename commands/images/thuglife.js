@@ -38,7 +38,7 @@ let userdata = db.fetch(`userData_${message.author.id}`)
 const { MessageAttachment } = require("discord.js");
 
 const { body } = await get("https://emilia.shrf.xyz/api/thug-life")
-.query({ image: target.displayAvatarURL({ format: "png", size: 1024 }) })
+.query({ image: target.displayAvatarURL({ format: "png", size: 512 }) })
 .set("Authorization", `Bearer ${token}`);
 
 let attachment = new MessageAttachment(body, `${target}-thug-life.gif`)
