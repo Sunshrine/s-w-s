@@ -26,10 +26,12 @@ module.exports = {
 }
     
     function pickRandomItem() {
-        var obj_keys = Object.keys(items);
+        var obj_keys1 = Object.keys(items);
+      var obj_keys = obj_keys1.filter(el => el !== 'Centapremium')
         var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
         items.selecteditem = items[ran_key];
-        console.log(items.selecteditem.name)
+        var selecteditem = items.selecteditem.name
+        return selecteditem
 }
   
     let code = makeid(15)
@@ -41,11 +43,13 @@ module.exports = {
     db.set(`code-${code2}`, { redeemed: 'unredeemed', type: 'premium' })
     
     let code3 = makeid(15)
-    let itemx = pickRandomItem()
     
-    db.set(`code-${code3}`, { redeemed: 'unredeemed', type: 'item', item: itemx.name })
+    let item = pickRandomItem()
+
     
-    message.author.send(`Created codes \`\`${code}\`\`, \`\`${code2}\`\`. and \`\`${code3}\`\` with item: ${itemx.name}`)
+    db.set(`code-${code3}`, { redeemed: 'unredeemed', type: 'item', item: item })
+    
+    message.author.send(`Created codes \`\`${code}\`\`, \`\`${code2}\`\`. and \`\`${code3}\`\` with item: ${item}`)
     
   }
 };
