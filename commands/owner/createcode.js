@@ -27,10 +27,9 @@ module.exports = {
     
     function pickRandomItem() {
         var obj_keys = Object.keys(items);
-        var ran_key = obj_keys[Math.floor(Math.random() * obj_keys.length)];
+        var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
         items.selecteditem = items[ran_key];
-        console.log(items.selecteditem);
-        console.log(items);
+        console.log(items.selecteditem.name)
 }
   
     let code = makeid(15)
@@ -44,9 +43,9 @@ module.exports = {
     let code3 = makeid(15)
     let itemx = pickRandomItem()
     
-    db.set(`code-${code3}`, { redeemed: 'unredeemed', type: 'item', item: itemx })
+    db.set(`code-${code3}`, { redeemed: 'unredeemed', type: 'item', item: itemx.name })
     
-    message.author.send(`Created codes \`\`${code}\`\`, \`\`${code2}\`\`. and \`\`${code3}\`\` with item: ${itemx}`)
+    message.author.send(`Created codes \`\`${code}\`\`, \`\`${code2}\`\`. and \`\`${code3}\`\` with item: ${itemx.name}`)
     
   }
 };
