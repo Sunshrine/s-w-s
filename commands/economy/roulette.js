@@ -19,13 +19,13 @@ module.exports = {
     if(lastroulette !== null && cooldown - (Date.now() - lastroulette) > 0) {
       let timeobj = ms(cooldown - (Date.now() - lastroulette))
       
-      let dailyrou
+      let cooldowne = new MessageEmbed()
       
-      dailystatus.setColor('RED')
-      dailystatus.setTitle('Reward already collected!')
-      dailystatus.setDescription(`${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`)
+      cooldowne.setColor('RED')
+      cooldowne.setTitle('Woah, woah, you\'re on cooldown!')
+      cooldowne.setDescription(`${message.member}, please wait *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`)
       
-      message.channel.send(dailystatus)
+      return message.channel.send(cooldowne)
     }
 
   function isOdd(num) { 
@@ -93,6 +93,8 @@ let colorbad = new MessageEmbed()
         .setDescription(`❌ You lost ${money} coins\n\nMultiplier: 0x`);
         message.channel.send(moneyEmbed4)
     }
+    
+          db.set(`lastRoulette_${message.author.id}`, Date.now())
   
   }
 }
