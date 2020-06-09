@@ -53,5 +53,22 @@ module.exports = {
         db.set(`code-${args[0]}.redeemed`, "redeemed");
       }
     }
+  if (typecheck === "item") {
+    let item = db.fetch(`code-${args[0]}.item`)
+    if(!item) item = 'KFC'
+    
+          let itemembed = new MessageEmbed()
+        .setColor("GREEN")
+        .setTitle("Successfully redeemed code!")
+        .setDescription(
+          `You have gained a prize of 🎁 ${item}!`
+        );
+
+      message.channel.send(itemembed);
+    
+        db.push(`userData_${message.author.id}.inventory`, item)
+        
+        db.set(`code-${args[0]}.redeemed`, "redeemed");
+    }
   }
 };
