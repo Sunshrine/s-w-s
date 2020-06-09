@@ -11,6 +11,37 @@ setInterval(() => {
   http.get(`http://sunshrine-centauri.glitch.me`)
 }, 280000);
 
+var fs = require('fs')
+var app2 = express()
+
+app2.use(express.bodyParser())
+
+app2.get('/', function(request, response) {
+  console.log('GET /')
+  var html = `
+    <html>
+        <body>
+            <form method="post" action="http://localhost:3000">Name: 
+                <input type="text" name="name" />
+                <input type="submit" value="Submit" />
+            </form>
+        </body>
+    </html>`
+  response.writeHead(200, {'Content-Type': 'text/html'})
+  response.end(html)
+})
+
+app.post('/', function(request, response) {
+  console.log('POST /')
+  console.dir(request.body)
+  response.writeHead(200, {'Content-Type': 'text/html'})
+  response.end('thanks')
+})
+
+let port = 3000
+app.listen(port)
+console.log(`Listening at http://localhost:${port}`)
+
 const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
 const { config } = require("dotenv");
 const NewsAPI = require('newsapi')
@@ -27,8 +58,6 @@ client.snipes = new Map();
 config({
     path: __dirname + "/.env"
 });
-
-const fs = require("fs");
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);

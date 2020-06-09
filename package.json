@@ -68,7 +68,7 @@
     "opusscript": "^0.0.7",
     "axios": "^0.19.2",
     "canvas": "^2.6.1",
-    "pnpm": "^5.1.4",
+    "pnpm": "^5.1.6",
     "figlet-cli": "^0.1.1",
     "boxen": "^4.2.0",
     "dblapi.js": "^2.4.0"
