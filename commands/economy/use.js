@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const db = require("quick.db");
+const db = require("quick.db"),
+      fs = require("fs")
 
 module.exports = {
   name: "use",
@@ -40,10 +41,23 @@ module.exports = {
         }
         return this;
       };
+      
+      const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
+          
+    function pickItemMessage() {
+        var obj_keys1 = Object.keys(items);
+       var obj_keys = obj_keys1.filter(el => el === args[0])
+        var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
+        items.selecteditem = items[ran_key];
+        var selecteditem = items.selecteditem.usagemsg
+        return selecteditem
+}
+      
+      let msg = pickItemMessage()
 
       let x = inventory.remove(args[0]);
       db.set(`userData_${message.author.id}.inventory`, x);
-      message.channel.send(`Used ${args[0]}`);
+      message.channel.send(msg);
     }
   }
 };
