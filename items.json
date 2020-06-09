@@ -3,36 +3,42 @@
     "name": "Pickle",
     "type": "Fun",
     "price": "100",
-    "description": "You want a pickle? 🥒"
+    "description": "You want a pickle? 🥒",
+    "usagemsg": "You ate that pickle, it was sour and tasty!"
   },
   "Weed": {
     "name": "Weed",
     "type": "Drugs",
     "price": "100",
-    "description": "Ehh, it's weed."
+    "description": "Ehh, it's weed.",
+    "usagemsg": "You used the weed, now you're high, congrats!"
   },
   "Lollipop": {
     "name": "Lollipop",
     "type": "Sweets",
     "price": "50",
-    "description": "Sweet, sweet lollipop."
+    "description": "Sweet, sweet lollipop.",
+    "usagemsg": "You are now in love with that lollipop."
   },
   "Fish": {
     "name": "Fish",
     "type": "Food",
     "price": "50",
-    "description": "It's a fish, you wanna eat it or slap someone with it?"
+    "description": "It's a fish, you wanna eat it or slap someone with it?",
+    "usagemsg": "You slapped a person with that fish, then you cleaned it and GRILLed it."
   },
   "KFC": {
     "name": "KFC",
     "type": "Food",
     "price": "50",
-    "description": "A WILD BUCKET OF KFC APPEARED!"
+    "description": "A WILD BUCKET OF KFC APPEARED!",
+    "usagemsg": "Colonel Sanders has entered the chat. He was happy to see you eating your KFC."
   },
   "Centapremium":{
     "name": "Centapremium",
     "type": "Bot Premium",
     "price": "1000000",
-    "description": "THIS IS CENTAURI BOT PREMIUM!!!!!!!!!!"
+    "description": "THIS IS CENTAURI BOT PREMIUM!!!!!!!!!!",
+    "usage": "Congrats! Now you have C e n t a p r e m i u m !"
   }
 }
