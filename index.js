@@ -27,7 +27,7 @@ client.commands = new Collection();
 client.aliases = new Collection();
 client.snipes = new Map();
 
-const DBL = require('dblapi.js');
+const DBL = require('dblapi.js')
 
 const DBLprocess = new DBL(process.env.DBL_TOKEN, { webhookServer: server }, client);
 
