@@ -1,23 +1,20 @@
 const http = require('http');
 const express = require('express');
 const app = express();
-var server = require('http').createServer(app);
 app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
+  var time = new Date();
+  console.log(`${time.toLocaleTimeString({}, { timeZone: 'Etc/GMT-2' })} || Ping Received`);
   response.sendStatus(200);
 });
-const listener = server.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+  http.get(`http://sunshrine-centauri.glitch.me`)
 }, 280000);
 
-
-const fs = require('fs')
 const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
 const { config } = require("dotenv");
-const NewsAPI = require('newsapi');
+const NewsAPI = require('newsapi')
+
 
 const client = new Client({
     disableEveryone: true
@@ -30,6 +27,8 @@ client.snipes = new Map();
 config({
     path: __dirname + "/.env"
 });
+
+const fs = require("fs");
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);

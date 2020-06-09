@@ -26,14 +26,6 @@ module.exports = {
     
     let blacklistcheck = db.fetch(`serverBlacklist_${message.guild.id}_${user.id}`)
     
-        if(blacklistcheck && blacklistcheck !== null) {
-    
-    db.delete(`serverBlacklist_${message.guild.id}_${user.id}`)
-          
-    return message.channel.send(`Successfully un-blacklisted ${user}.`)
-    
-  }
-    
     if(!blacklistcheck || !blacklistcheck.length) {
     
     db.set(`serverBlacklist_${message.guild.id}_${user.id}`, {
@@ -42,9 +34,13 @@ module.exports = {
       time: time.toLocaleString({}, { TimeZone: 'Etc/GMT-2' })
     })
     
-    return message.channel.send(`Successfully blacklisted ${user}. Please note that this is a server-wide blacklist, not a global one.`)
-  } 
+    message.channel.send(`Successfully blacklisted ${user}. Please note that this is a server-wide blacklist, not a global one.`)
+  } else {
     
+    db.delete(`serverBlacklist_${message.guild.id}_${user.id}`)
+    message.channel.send(`Successfully un-blacklisted ${user}.`)
+    
+  }
     
   }
 }

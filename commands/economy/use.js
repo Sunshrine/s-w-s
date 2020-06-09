@@ -9,7 +9,19 @@ module.exports = {
   aliases: ["useitem"],
   usage: "[item name]",
   run: async (client, message, args) => {
+    let inventory = db.fetch(`userData_${message.author.id}.inventory`);
+    console.log(inventory);
+    if (!inventory || !inventory.length) inventory = "No items bought.";
 
+    if (!args[0]) {
+      const embed1 = new MessageEmbed()
+        .setTitle(`Your Inventory || ${message.author.tag}`)
+        .setDescription(`Your Items`)
+        .addField("Items", inventory)
+        .setColor("GREEN");
+
+      message.channel.send(embed1);
+    } else {
       let inventory = db.get(`userData_${message.author.id}.inventory`);
       if (!inventory.includes(args[0]))
         return message.reply(
@@ -46,6 +58,6 @@ module.exports = {
       let x = inventory.remove(args[0]);
       db.set(`userData_${message.author.id}.inventory`, x);
       message.channel.send(msg);
-    
+    }
   }
 };
