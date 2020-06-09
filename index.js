@@ -6,7 +6,7 @@ app.get("/", (request, response) => {
   console.log(Date.now() + " Ping Received");
   response.sendStatus(200);
 });
-const listener = server.listen(process, function() {
+const listener = server.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 setInterval(() => {
@@ -29,6 +29,9 @@ dbl.webhook.on('ready', hook => {
 });
 
 dbl.webhook.on('vote', vote => {
+  if(vote.type === test) {
+    console.log(`Test worked!`)
+  }
   console.log(`User with ID ${vote.user} just voted!`);
 });
 
