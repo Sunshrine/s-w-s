@@ -22,10 +22,14 @@ const client = new Client({
     disableEveryone: true
 });
 const DBL = require('dblapi.js');
-const dbl = new DBL(process.env.DBLTOKEN, { webhookServer: listener, webhookAuth: 'mylittlecentauri' }, client);
+const dbl = new DBL(process.env.DBL_TOKEN, { webhookServer: listener, webhookAuth: 'mylittlecentauri' }, client);
 
 dbl.webhook.on('ready', hook => {
   console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+});
+
+dbl.webhook.on('vote', vote => {
+  console.log(`User with ID ${vote.user} just voted!`);
 });
 
 client.commands = new Collection();
