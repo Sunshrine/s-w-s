@@ -8,8 +8,8 @@ module.exports = async (client, message) => {
   if (!message.guild) return;
 
   if (message.content.includes(message.mentions.members.first())) {
-    let o = message.mentions.users.first()
-    let id = o.id
+    let o = message.mentions.members.first()
+    let id = o.user.id
     let mentioned = client.afk.get(id);
     if (mentioned) {
       let afkEmbed = new MessageEmbed()
