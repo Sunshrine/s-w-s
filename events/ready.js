@@ -1,8 +1,28 @@
 const { MessageEmbed } = require("discord.js"),
       figlet = require('figlet'),
-      boxen = require('boxen')
+      boxen = require('boxen'),
+      db = require('quick.db')
 
 module.exports = async (client, message) => {
+  
+  let check = db.fetch(`restartCentauri`)
+  if(check !== null) {
+    let status = db.fetch(`restartCentauri.status`)
+    if(status !== null && status === 'on') {
+      let messageID = db.fetch(`restartCentauri.messageID`)
+      let channelID = db.fetch(`restartCentauri.channelID`)
+      
+      if(!channelID || !channelID.length || !messageID || !messageID.length) return;
+      let channel = client.channels.cache.get(channelID)
+      if(!channel) return;
+      
+      let message = channel.messages.fetch(messageID)
+      .then(() => {
+        if(!message) return
+        message.edit()
+      })
+    }
+  }
   figlet.text('Centauri', {
       horizontalLayout: 'fitted'
   }, function(err, data) {
