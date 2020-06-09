@@ -24,11 +24,23 @@ module.exports = {
     
     if(user.id === message.author.id) message.reply(`**you cannot blacklist yourself!**`)
     
-    db.set(`blacklist_${user.id}`, {
+    let blacklistcheck = db.fetch(`serverBlacklist_${message.guild.id}_${user.id}`)
+    
+    if(!blacklistcheck || !blacklistcheck.length) {
+    
+    db.set(`serverBlacklist_${message.guild.id}_${user.id}`, {
       operator: message.author + ' || ' + message.author.tag,
       type: "serverwide",
-      time: time.toLocaleString({}, { TimeZone: 'tc/GMT-2' })
+      time: time.toLocaleString({}, { TimeZone: 'Etc/GMT-2' })
     })
+    
+    message.channel.send(`Successfully blacklisted ${user}. Please note that this is a server-wide blacklist, not a global one.`)
+  } else {
+    
+    db.delete(`serverBlacklist_${message.guild.id}_${user.id}`)
+    message.channel.send(`Successfully un-blacklisted ${user}.`)
+    
+  }
     
   }
 }
