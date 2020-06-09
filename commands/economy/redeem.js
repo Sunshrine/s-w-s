@@ -50,7 +50,10 @@ module.exports = {
 
       message.channel.send(premiumembed);
         
-        db.set(`code-${args[0]}.redeemed`, "redeemed");
+        client.usedcodes.set(`${args[0]}`, {
+          type: 'premium',
+          redeemtime: new Date({}, { TimeZone: 'UTC-2' })
+        })
       }
     }
   if (typecheck === "item") {

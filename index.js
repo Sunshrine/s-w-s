@@ -55,5 +55,6 @@ client.newsapi = new NewsAPI('6dd7f7c3adaa4e3f8e47d38ffa9234c3');
 client.queue = new Map()
 client.starboard = new Map()
 client.settings = new Map()
+client.usedcodes = new Collection()
 
 client.login(process.env.TOKEN);
