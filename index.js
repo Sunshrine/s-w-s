@@ -29,7 +29,7 @@ dbl.webhook.on('ready', hook => {
 });
 
 dbl.webhook.on('vote', vote => {
-  if(vote.type === test) {
+  if(vote.type === 'test') {
     console.log(`Test worked!`)
   }
   console.log(`User with ID ${vote.user} just voted!`);
