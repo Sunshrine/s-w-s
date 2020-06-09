@@ -32,6 +32,7 @@
     "common-tags": "^1.8.0",
     "cows": "^2.1.0",
     "crypto": "^1.0.1",
+    "dblapi.js": "^2.4.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

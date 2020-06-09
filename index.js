@@ -1,14 +1,16 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+var server = require('http').createServer(app);
 app.get("/", (request, response) => {
-  var time = new Date();
-  console.log(`${time.toLocaleTimeString({}, { timeZone: 'Etc/GMT-2' })} || Ping Received`);
+  console.log(Date.now() + " Ping Received");
   response.sendStatus(200);
 });
-app.listen(process.env.PORT);
+const listener = server.listen(process.env.PORT, function() {
+  console.log('Your app is listening on port ' + listener.address().port);
+});
 setInterval(() => {
-  http.get(`http://sunshrine-centauri.glitch.me`)
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
 const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
@@ -18,6 +20,12 @@ const NewsAPI = require('newsapi')
 
 const client = new Client({
     disableEveryone: true
+});
+const DBL = require('dblapi.js');
+const dbl = new DBL(process.env.DBLTOKEN, { webhookServer: listener, webhookAuth: 'mylittlecentauri' }, client);
+
+dbl.webhook.on('ready', hook => {
+  console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
 
 client.commands = new Collection();
