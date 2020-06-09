@@ -3,9 +3,9 @@ const db = require('quick.db'),
 
 module.exports = {
   name: 'removepremium',
-  description: 'Add premium to a user.',
+  description: 'Remove premium from a user.',
   category: 'owner',
-  aliases: ['addp', 'addpremiumship'],
+  aliases: ['removep', 'removepremiumship'],
   usage: '[user]',
   run: async (client, message, args) => {
     
@@ -30,11 +30,11 @@ module.exports = {
     
     if(!premium || premium === null || premium === undefined) premium = 'none'
     
-    if(premium = 'none') {
-      db.set(`userData_${user.id}.indexed.premium`, 'Unlimited')
-      message.channel.send('Added premium to user!')
+    if(premium === 'Unlimited') {
+      db.set(`userData_${user.id}.indexed.premium`, 'none')
+      message.channel.send('Removed premium from user!')
     } else {
-      if(premium !== null || premium !== undefined || premium !== 'none') return message.reply('that user already has premium!')
+      if(premium === null || premium === undefined || premium === 'none') return message.reply('that user doesn\'t have premium!')
     }
     
   }
