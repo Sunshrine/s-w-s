@@ -15,12 +15,14 @@ module.exports = {
         
         
         console.log('Restarting bot!')
-      sx.edit('Restarting...')
-        .then(() => {
-       db.set(`restartCentauri`, { status: 'on', messageID: sx.id, channelID: sx.channel.id })
-        }).then(() => {
-         process.exit(1)
-       })
+      setTimeout(() => {
+        sx.edit('Restarting...')
+    }, 2000)
+      
+       await db.set(`restartCentauri`, { status: 'on', messageID: sx.id, channelID: sx.channel.id })
+        
+      await process.exit(1)
+       
 
         
     } catch(e) {
