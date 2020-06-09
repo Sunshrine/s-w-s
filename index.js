@@ -1,47 +1,19 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+var server = require('http').createServer(app);
 app.get("/", (request, response) => {
-  var time = new Date();
-  console.log(`${time.toLocaleTimeString({}, { timeZone: 'Etc/GMT-2' })} || Ping Received`);
+  console.log(Date.now() + " Ping Received");
   response.sendStatus(200);
 });
-app.listen(process.env.PORT);
+const listener = server.listen(process.env.PORT, function() {
+  console.log('Your app is listening on port ' + listener.address().port);
+});
 setInterval(() => {
-  http.get(`http://sunshrine-centauri.glitch.me`)
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
-var fs = require('fs')
-var app2 = express()
-
-app2.use(express.bodyParser())
-
-app2.get('/', function(request, response) {
-  console.log('GET /')
-  var html = `
-    <html>
-        <body>
-            <form method="post" action="http://localhost:3000">Name: 
-                <input type="text" name="name" />
-                <input type="submit" value="Submit" />
-            </form>
-        </body>
-    </html>`
-  response.writeHead(200, {'Content-Type': 'text/html'})
-  response.end(html)
-})
-
-app.post('/', function(request, response) {
-  console.log('POST /')
-  console.dir(request.body)
-  response.writeHead(200, {'Content-Type': 'text/html'})
-  response.end('thanks')
-})
-
-let port = 3000
-app.listen(port)
-console.log(`Listening at http://localhost:${port}`)
-
+const fs = require('fs')
 const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
 const { config } = require("dotenv");
 const NewsAPI = require('newsapi')
