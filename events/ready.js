@@ -16,10 +16,11 @@ module.exports = async (client, message) => {
       let channel = client.channels.cache.get(channelID)
       if(!channel) return;
       
-      let message = channel.messages.fetch(messageID)
-      .then(() => {
+      channel.messages.fetch(messageID)
+      .then(message => {
         if(!message) return
-        message.edit()
+        message.edit('<:success:719123112964128830> Successfully restarted!')
+        db.set(`restartCentauri.status`, 'off')
       })
     }
   }
