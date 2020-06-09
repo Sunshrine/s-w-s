@@ -54,7 +54,7 @@
     "weather-js": "^2.0.0",
     "request-promise": "^4.2.5",
     "strict-uri-encode": "^2.0.0",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "chalk-animation": "^1.6.0",
     "iso-639-1": "^2.1.2",
     "mathjs": "^6.6.5",
@@ -68,7 +68,7 @@
     "opusscript": "^0.0.7",
     "axios": "^0.19.2",
     "canvas": "^2.6.1",
-    "pnpm": "^5.1.4",
+    "pnpm": "^5.1.6",
     "figlet-cli": "^0.1.1",
     "boxen": "^4.2.0"
   }
