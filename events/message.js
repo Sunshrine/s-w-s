@@ -5,26 +5,6 @@ module.exports = async (client, message) => {
   const settings = require("../settings.json");
 
   if (message.author.bot) return;
-  if (
-    client.killed.has(message.author.id) &&
-    !settings.owners.includes(message.author.id)
-  )
-    message.delete();
-  if (
-    client.killed.has(message.author.id) &&
-    settings.owners.includes(message.author.id)
-  ) {
-    client.killed.delete(message.author.id);
-    message
-      .reply(
-        "**you have been revived automatically because you are a Centauri bot owner.**"
-      )
-      .then(msg =>
-        msg.delete({
-          timeout: 5000
-        })
-      );
-  }
   if (!message.guild) return;
 
   if (message.content.includes(message.mentions.members.first())) {
@@ -68,14 +48,11 @@ module.exports = async (client, message) => {
       })
     );
   }
-
-  if (client.blacklistedUsers.has(message.author.id)) {
-    message.delete();
-    return message.reply("sorry, you cannot use commands!").then(m =>
-      m.delete({
-        timeout: 5000
-      })
-    );
+  
+  let serverblacklist = db.fetch(`serverBlacklist_${message.guild.id}_${message.author.id}`)
+  if(serverblacklist && serverblacklist !== null) {
+    message.delete()
+    return message.channel.send(`${message.author}, you are blacklisted in this server, meaning you cannot use commands here.`)
   }
 
   const args = message.content
