@@ -54,7 +54,7 @@ module.exports = {
 		};
 	}
 
-	getMemeDescription function($){
+	function getMemeDescription($) {
 		const children = $('.bodycopy').first().children();
 		let foundAbout = false;
 		for (let i = 0; i < children.length; i++) {
