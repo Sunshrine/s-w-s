@@ -13,6 +13,7 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
+
 const fs = require('fs')
 const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
 const { config } = require("dotenv");
