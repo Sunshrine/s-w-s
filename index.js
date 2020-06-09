@@ -6,7 +6,7 @@ app.get("/", (request, response) => {
   console.log(Date.now() + " Ping Received");
   response.sendStatus(200);
 });
-const listener = server.listen(process.env.PORT, function() {
+const listener = server.listen(3000, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 setInterval(() => {
