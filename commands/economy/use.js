@@ -22,11 +22,15 @@ module.exports = {
 
       message.channel.send(embed1);
     } else {
-      let inventory = db.get(`userData_${message.author.id}.inventory`);
-      if (!inventory.map(v => v.toLowerCase()).includes(args[0].toLowerCase()))
+      let inventory = db.fetch(`userData_${message.author.id}.inventory`);
+      for (let i = 0; i < inventory.length; i++) {
+         inventory[i] = inventory[i].toLowerCase();
+              if (inventory[i] !== args[0].toLowerCase())
         return message.reply(
           `uhmm.. either ${args[0]} is not an item or you don't have it.`
         );
+      }
+
 
       Array.prototype.remove = function() {
         var what,
