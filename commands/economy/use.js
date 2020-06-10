@@ -47,7 +47,7 @@ module.exports = {
           
     function pickItemMessage() {
         var obj_keys1 = Object.keys(items);
-       var obj_keys = obj_keys1.filter(el => el === args[0])
+       var obj_keys = obj_keys1.filter(el => el === args[0].replace(/^./, v => v.toUpperCase()))
         var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
         items.selecteditem = items[ran_key];
         var selecteditem = items.selecteditem.usagemsg
