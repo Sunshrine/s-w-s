@@ -22,29 +22,22 @@ module.exports = {
 
       message.channel.send(embed1);
     } else {
-      let inventory = db.fetch(`userData_${message.author.id}.inventory`);
-      for (let i = 0; i < inventory.length; i++) {
-         inventory[i] = inventory[i].toLowerCase();
-              if (inventory[i] !== args[0].toLowerCase())
-        return message.reply(
-          `uhmm.. either ${args[0]} is not an item or you don't have it.`
-        );
-      }
+      let inventory = await db.get(`userData_${message.author.id}.inventory`);
+      let inventory2 = await db.get(`userData_${message.author.id}.inventory`);
+      
+      let sorted = inventory2.map(v => v.toLowerCase());
+      if(!sorted.includes(args[0].toLowerCase())) return message.reply(`You don't have an item that matches that name.`)
+    }
 
 
-      Array.prototype.remove = function() {
-        var what,
-          a = arguments,
-          L = a.length,
-          ax;
-        while (L && this.length) {
-          what = a[--L];
-          while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-          }
-        }
-        return this;
-      };
+function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
+
       
       const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
           
@@ -59,9 +52,11 @@ module.exports = {
       
       let msg = pickItemMessage()
 
-      let x = inventory.remove(args[0]);
+      let x = removeItemOnce(inventory, args[0].replace(/^./, v => v.toUpperCase()))
+      console.log(x)
       db.set(`userData_${message.author.id}.inventory`, x);
       message.channel.send(msg);
+    
     }
   }
-};
+
