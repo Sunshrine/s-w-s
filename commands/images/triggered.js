@@ -3,7 +3,6 @@ const db = require('quick.db')
 
 module.exports = {
     name: "triggered",
-    slowdown: 5,
     category: "images",
     description: "Make triggered images!",
     usage: "[user]",
@@ -38,7 +37,7 @@ let userdata = db.fetch(`userData_${message.author.id}`)
 const { MessageAttachment } = require("discord.js");
 
 const { body } = await get("https://emilia.shrf.xyz/api/triggered")
-.query({ image: target.displayAvatarURL({ size: 1024, dynamic: true }) })
+.query({ image: target.displayAvatarURL({ size: 512 }) })
 .set("Authorization", `Bearer ${token}`);
 
 let attachment = new MessageAttachment(body, `${target}-triggered.gif`)
