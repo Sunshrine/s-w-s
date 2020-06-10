@@ -36,8 +36,8 @@ let userdata = db.fetch(`userData_${message.author.id}`)
     const { get } = require("node-superfetch");
 const { MessageAttachment } = require("discord.js");
 
-const { body } = await get("https://emilia.shrf.xyz/api/triggered")
-.query({ image: target.displayAvatarURL({ size: 512 }) })
+const { body } = await get("https://emilia-api.glitch.me/api/triggered")
+.query({ image: target.displayAvatarURL({ format: 'png', size: 1024 }) })
 .set("Authorization", `Bearer ${token}`);
 
 let attachment = new MessageAttachment(body, `${target}-triggered.gif`)
