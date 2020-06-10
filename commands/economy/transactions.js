@@ -36,8 +36,11 @@ module.exports = {
           collector.stop('Success.')
           
         case 'B':
-          let user = message.mentions.users.first()
-          if(!)
+          menumsg.edit('Please mention a user.')
+          if(m.content.includes(message.mentions.users.first())) {
+            let user = message.mentions.users.first()
+            
+          }
       }
     })
   }
