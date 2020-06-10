@@ -34,7 +34,7 @@ module.exports = {
           menu.setFooter('Centauri Transactions Menu')
           menumsg.edit(menu)
           collector.stop('Success.')
-          
+      
         case 'B':
           menumsg.edit('Please mention a user.')
           if(m.content.includes(message.mentions.users.first())) {
@@ -42,6 +42,6 @@ module.exports = {
             
           }
       }
-    })
+    
   }
 }
