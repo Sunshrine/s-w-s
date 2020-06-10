@@ -30,7 +30,7 @@ module.exports = {
     let inventory = db.get(`userData_${message.author.id}.inventory`);
     if (!inventory || !inventory.length) inventory = "No items bought.";
     let lowerCaseInventory = inventory.map(v => v.toLowerCase());
-    if (!lowerCaseInventory.includes(args[0].toLowerCase()))
+    if (!lowerCaseInventory.includes(args[1].toLowerCase()))
       return message.reply(itemdoesnotexist);
 
     Array.prototype.remove = function() {
@@ -57,11 +57,12 @@ module.exports = {
       );
 
 
-    let x = await inventory.remove(args[0]);
+    
     db.push(
-      `userData_${user.user.id}.items`,
+      `userData_${user.user.id}.inventory`,
       args[1].replace(/^./, v => v.toUpperCase())
     );
+    let x = inventory.remove(args[1]);
     db.set(`userData_${message.author.id}.inventory`, x)
     
     await message.reply(gifteditem)

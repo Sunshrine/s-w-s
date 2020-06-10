@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const db = require("quick.db")
+const db = require("quick.db"),
+      fs = require("fs")
 
 module.exports = {
   name: "use",
@@ -22,8 +23,7 @@ module.exports = {
       message.channel.send(embed1);
     } else {
       let inventory = db.get(`userData_${message.author.id}.inventory`);
-      let lowerCaseInventory = inventory.map(v => v.toLowerCase())
-      if (!lowerCaseInventory.includes(args[0].toLowerCase()))
+      if (!inventory.map(v => v.toLowerCase()).includes(args[0].toLowerCase()))
         return message.reply(
           `uhmm.. either ${args[0]} is not an item or you don't have it.`
         );
