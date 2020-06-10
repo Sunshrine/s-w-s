@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const db = require("quick.db");
-const ms = require("parse-ms");
+const ms = require("parse-ms"),
+      settings = require('../../settings.json')
 
 module.exports = {
   name: 'roulette',
@@ -16,7 +17,7 @@ module.exports = {
 
     let lastroulette = await db.fetch(`lastRoulette_${message.author.id}`)
     
-    if(lastroulette !== null && cooldown - (Date.now() - lastroulette) > 0) {
+    if(lastroulette !== null && cooldown - (Date.now() - lastroulette) > 0 && !settings.owners.includes(message.author.id)) {
       let timeobj = ms(cooldown - (Date.now() - lastroulette))
       
       let cooldowne = new MessageEmbed()
