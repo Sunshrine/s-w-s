@@ -1,5 +1,5 @@
 const db = require('quick.db')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageCollector } = require('discord.js')
 const { stripIndents } = require("common-tags");
 
 module.exports = {
@@ -20,6 +20,6 @@ module.exports = {
     .setFooter('Please reply with the letter of the option.')
     let menumsg = await message.channel.send(menu)
     
-    
+    let collector = new MessageCollector(message.channel, m => m.author.id === message.author.id)
   }
 }
