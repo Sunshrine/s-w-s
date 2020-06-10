@@ -38,7 +38,7 @@ module.exports = {
         
             let bal = await db.fetch(`coinBalance_${user.id}`);
     
-    if(!bal || !bal.length) bal = 0
+    if(!bal || bal === null) bal = 0
     
         let inventory = db.fetch(`userData_${message.author.id}.inventory`);
     console.log(inventory);
