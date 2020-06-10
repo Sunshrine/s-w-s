@@ -27,25 +27,21 @@ module.exports = {
 
     let user = message.mentions.members.first();
 
-    let inventory = db.get(`userData_${message.author.id}.inventory`);
-    if (!inventory || !inventory.length) inventory = "No items bought.";
-    let lowerCaseInventory = inventory.map(v => v.toLowerCase());
-    if (!lowerCaseInventory.includes(args[1].toLowerCase()))
-      return message.reply(itemdoesnotexist);
+    let inventory = await db.get(`userData_${message.author.id}.inventory`);
+    if (!inventory || !inventory.length) inventory = "No items bought."
+    let inventory2 = await db.get(`userData_${message.author.id}.inventory`);
+      
+    let sorted = inventory2.map(v => v.toLowerCase());
+    if(!sorted.includes(args[1].toLowerCase())) return message.reply(itemdoesnotexist)
+    
 
-    Array.prototype.remove = function() {
-      var what,
-        a = arguments,
-        L = a.length,
-        ax;
-      while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-          this.splice(ax, 1);
-        }
-      }
-      return this;
-    };
+function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
     
         const gifteditem = new MessageEmbed()
       .setColor("GREEN")
@@ -62,7 +58,7 @@ module.exports = {
       `userData_${user.user.id}.inventory`,
       args[1].replace(/^./, v => v.toUpperCase())
     );
-    let x = inventory.remove(args[1]);
+    let x = removeItemOnce(inventory, args[1].replace(/^./, v => v.toUpperCase()))
     db.set(`userData_${message.author.id}.inventory`, x)
     
     await message.reply(gifteditem)

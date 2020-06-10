@@ -26,7 +26,7 @@ module.exports = {
       let inventory2 = await db.get(`userData_${message.author.id}.inventory`);
       
       let sorted = inventory2.map(v => v.toLowerCase());
-      if(!sorted.includes(args[0].toLowerCase())) return message.reply(`You don't have an item that matches that name.`)
+      if(!sorted.includes(args[0].toLowerCase())) return message.reply(`you don't have an item that matches that name.`)
     }
 
 

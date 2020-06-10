@@ -9,7 +9,7 @@ module.exports = {
   aliases: ["ac"],
   usage: "[user]",
   run: async (client, message, args) => {
-    if (!settings.includes(message.author.id))
+    if (!settings.owners.includes(message.author.id))
       return message.reply("you are not the bot owner!");
 
     let user = message.mentions.members.first() || message.author;
@@ -27,7 +27,7 @@ module.exports = {
     let moneyEmbed = new MessageEmbed()
       .setColor("GREEN")
       .setDescription(
-        `<:success:719123112964128830> Added {
+        `<:success:719123112964128830> Added ${
           args[1]
         } coins!\n\nNew Balance: ${coin} ${bal}`
       );
