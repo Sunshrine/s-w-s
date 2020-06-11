@@ -2,7 +2,7 @@ const db = require("quick.db"),
   { MessageEmbed } = require("discord.js"),
   { stripIndents } = require("common-tags");
 
-module.exports = async (member) => {
+module.exports = (member) => {
   const guild = member.guild
   let welcomechannel = db.fetch(`welcomeChannel_${guild.id}`);
   if (!welcomechannel || !welcomechannel.length) return;
@@ -17,7 +17,7 @@ We hope you enjoy your time and stay here!
 We are honoured to have you here!`)
     );
 
-  let channel = guild.channels.cache.get(welcomechannel);
+  let channel = channel.channels.cache.get(welcomechannel);
   if (!channel || !channel.length) return;
 
   channel.send(welcome);
