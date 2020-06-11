@@ -104,15 +104,26 @@ module.exports = async (client, message) => {
       amount: amount
     });
     
-    const filter = m => m.content.includes(code) && !m.author.bot
+    const filter = m => m.content === code && !m.author.bot
     
     const first = new MessageEmbed()
     .setColor('GREEN')
     .setTitle('Rare event!')
-    .setDescription(`First one to type \`\`${prefix}redeem ${code}\`\` wins <:centacoin:718780405481734175> ${amount}!`)
+    .setDescription(`First one to type \`\`${code}\`\` wins <:centacoin:718780405481734175> ${amount}!`)
     
     message.channel.send(first).then(() => {
-      message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
+      message.channel.awaitMessages(filter, { max: 1, time: 120000, errors: ['time'] })
+      .then(collected => {
+        if(collected.first().content === code) {
+          first.setColor('BLUE')
+          first.setTitle('Code claimed!')
+          first.setDescription(`Congratulations ${collected.first().author}, you have collected your prize of <:centacoin:718780405481734175> ${amount}!`)
+          
+          db.add(`coinBalance_${collected.first()}`)
+          
+          message.channel.send(first)
+        }
+      })
     })
   }
 };
