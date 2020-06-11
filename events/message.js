@@ -7,27 +7,25 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
   if (!message.guild) return;
 
-  if (message.content.includes(message.mentions.members.first())) {
-    let o = message.mentions.members.first()
-    let id = o.user.id
-    let mentioned = client.afk.get(id);
-    if (mentioned) {
+  if (message.content.includes(message.mentions.users.first())) {
+    let mentioned = db.fetch(`isAfk_${message.mentions.users.first().id}`)
+    if (mentioned === true) {
       let afkEmbed = new MessageEmbed()
         .setColor("ORANGE")
         .setDescription(
-          `**${mentioned.username}** is currently AFK. \n**Reason:** ${mentioned.reason}`
+          `**${mentioned.username}** is currently AFK. \n**Reason:** ${db.fetch(`isAfk_${message.mentions.users.first().id}.reason`)}`
         );
       message.channel.send(afkEmbed);
     }
   }
-  let afkcheck = client.afk.get(message.author.id);
-  if (afkcheck) {
+  let afkcheck = db.fetch(`isAfk_${message.author.id}`)
+  if (afkcheck === true) {
     let unAFKEmbed = new MessageEmbed()
       .setColor("ORANGE")
       .setDescription(
         `${message.author.username}, you have been removed from the afk list!`
       );
-    client.afk.delete(message.author.id);
+    db.set(`isAfk_${message.author.id}`, false)
     message.reply(unAFKEmbed).then(m => m.delete({ timeout: 5000 }));
   }
 
