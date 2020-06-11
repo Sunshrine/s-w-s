@@ -13,8 +13,7 @@ module.exports = {
     let afklist = db.fetch(`isAfk_${message.author.id}`)
 
     if (!afklist || !afklist.length) {
-      db.set(`isAfk_${message.author.id}`, true)
-      db.set(`isAfk_${message.author.id}.reason`, reason)
+      db.set(`isAfk_${message.author.id}`, { status: true, reason: reason })
     }
     
       
