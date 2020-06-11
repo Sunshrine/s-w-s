@@ -35,7 +35,7 @@ dbl.webhook.on('vote', vote => {
     .setColor('GREEN')
     .setTitle('Test success!')
     
-    return console.log(`Test worked!`) && webhook.send(success)
+    return webhook.send(success).then(console => console.log('Test worked!'))
   }
   console.log(`User with ID ${vote.user} just voted!`);
 });
