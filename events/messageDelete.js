@@ -12,7 +12,7 @@ module.exports = async (client, message) => {
     const success = new MessageEmbed()
     .setColor('BLUE')
     .setTitle(`A message by ${message.author.tag} in ${message.guild.name} was deleted.`)
-    .setThumbnail(message.author.dispalyAvatarURL())
+    .setThumbnail(message.author.displayAvatarURL())
     
     if(message.content) success.setDescription(message.content)
     if(image && image !== null) success.setImage(message.attachments.first().proxyURL)

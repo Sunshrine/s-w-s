@@ -1,63 +1,80 @@
-const db = require('quick.db'),
-      ms = require('parse-ms')
-const { MessageEmbed, WebhookClient } = require('discord.js')
+const db = require("quick.db"),
+  ms = require("parse-ms");
+const { MessageEmbed, WebhookClient } = require("discord.js");
 
 module.exports = {
-  name: 'voterewards',
-  description: 'Get coins by voting for Centauri!',
-  category: 'economy',
-  aliases: ['votingrewards', 'voter', 'vrewards'],
+  name: "voterewards",
+  description: "Get coins by voting for Centauri!",
+  category: "economy",
+  aliases: ["votingrewards", "voter", "vrewards"],
   run: async (client, message, args) => {
-    
     function getRandomIntInclusive(min, max) {
-let x = Math.floor(Math.random() * ((max-min)+1) + min);
-  return x
-}
-    
-    function generateEmbed(name, color, title, description) {
-      name = new MessageEmbed()
-      .setColor(color)
-      .setTitle(title)
-      .setDescription(description)
-      return message.reply(name)
+      let x = Math.floor(Math.random() * (max - min + 1) + min);
+      return x;
     }
-    
-        let cooldown = 4.32e+7,
-        amount = getRandomIntInclusive(260, 1100)
-        
-        const { get } = require('node-superfetch')
-        
-        const { body } = await get(`https://top.gg/api/bots/${client.user.id}/check`)
-        .set('Authorization', process.env.DBL_TOKEN)
-        .query({ userId: message.author.id })
-        
-        if(body.vote === 0) {
-          const novote = new MessageEmbed() 
-          .setColor('RED') 
-          .setDescription('<:no:720295035085783103> You did not vote, please vote [here](https://top.gg/bot/692374798654898260/vote)!')
-          
-          message.reply(novote)
-          }
-    
-        let lastvote = await db.fetch(`lastVote_${message.author.id}`)
-    
-    if(lastvote !== null && cooldown - (Date.now() - lastvote) > 0 && body.vote === 1) {
-      let timeobj = ms(cooldown - (Date.now() - lastvote))
-      
-      
+
+    let cooldown = 4.32e7,
+      amount = getRandomIntInclusive(260, 1100);
+
+    const { get } = require("node-superfetch");
+
+    const { body } = await get(
+      `https://top.gg/api/bots/692374798654898260/check`
+    )
+      .set("Authorization", process.env.DBL_TOKEN)
+      .query({ userId: message.author.id });
+
+    if (body.vote === 0) {
+      const novote = new MessageEmbed()
+        .setColor("RED")
+        .setDescription(
+          "<:no:720295035085783103> You did not vote, please vote [here](https://top.gg/bot/692374798654898260/vote)!"
+        );
+
+      message.channel.send(novote);
+    }
+
+    let lastvote = await db.fetch(`lastVote_${message.author.id}`);
+
+    if (
+      lastvote !== null &&
+      cooldown - (Date.now() - lastvote) > 0 &&
+      body.vote === 1
+    ) {
+      let timeobj = ms(cooldown - (Date.now() - lastvote));
+
       const votestatus = new MessageEmbed()
-      .setColor('RED')
-      .setTitle('Reward already collected!')
-      .setDescription(`${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`)
-      
-      message.reply(votestatus)
+        .setColor("RED")
+        .setTitle("Reward already collected!")
+        .setDescription(
+          `${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`
+        );
+
+      message.channel.send(votestatus);
     } else {
-      if(vote !== 1) return;
-      
-      c
+      if (body.vote !== 1) return;
+
+      const success = new MessageEmbed()
+        .setColor("GREEN")
+        .setTitle("Successfully collected award!")
+        .setDescription(
+          `Thank you for voting for Centauri! You have gained <:centacoin:718780405481734175> ${amount} as an reward and thank you!`
+        );
+
+      db.set(`lastVote_${message.author.id}`, Date.now());
+      db.add(`coinBalance_${message.author.id}`, amount);
+
+      message.channel.send(success);
+
+      let webhook = new WebhookClient(
+        "720627238659293184",
+        "XooM_3qKk3uYsAoMnKhd9DJhfAHlQzwfcmiRDa40El0e2dLs7MA233MQLZ1hbHMDNMV8"
+      );
+      let collected = new MessageEmbed()
+        .setColor("BLUE")
+        .setDescription(
+          `${message.author.username} has collected their vote reward of ${amount} coins.`
+        );
     }
-      
-    
-        
   }
-}
+};
