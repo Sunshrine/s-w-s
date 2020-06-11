@@ -14,16 +14,6 @@ let money = db.all().filter(data => data.ID.startsWith(`coinBalance`)).sort((a, 
     var finalLb = "";
     for (var i in money) {
       finalLb += `**${money.indexOf(money[i])+1}. ${client.users.cache.get(money[i].ID.split('_')[1]) ? client.users.cache.get(money[i].ID.split('_')[1]).tag : "Unknown User#0000"}** - ${money[i].data} :dollar:\n`;
-      
-      if(money.indexOf(money[i])+1 === 1) {
-      finalLb.replace(money.indexOf(money[i])+1, '🥇')
-      }
-      if(money.indexOf(money[i])+1 === 2) {
-      finalLb.replace(money.indexOf(money[i])+1, '🥈')
-      }
-      if(money.indexOf(money[i])+1 === 3) {
-      finalLb.replace(money.indexOf(money[i])+1, '🥉')
-      }
     }
     const embed = new MessageEmbed()
     .setAuthor(`Leaderboard!`, message.guild.iconURL())
