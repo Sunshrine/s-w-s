@@ -18,7 +18,7 @@ let money = db.all().filter(data => data.ID.startsWith(`coinBalance`)).sort((a, 
     const embed = new MessageEmbed()
     .setAuthor(`Leaderboard!`, message.guild.iconURL())
     .setColor("#7289da")
-    .setDescription(finalLb)
+    .setDescription(finalLb.replace('1.', '🥇').replace('2.', '🥈').replace('3.', '🥉'))
     .setFooter(client.user.tag, client.user.displayAvatarURL())
     .setTimestamp()
     message.channel.send(embed);
