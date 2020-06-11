@@ -13,7 +13,7 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
-const { Client, Collection, MessageEmbed, MessageAttachment } = require("discord.js");
+const { Client, Collection, MessageEmbed, MessageAttachment, WebhookClient } = require("discord.js");
 const { config } = require("dotenv");
 const NewsAPI = require('newsapi')
 
@@ -30,7 +30,12 @@ dbl.webhook.on('ready', hook => {
 
 dbl.webhook.on('vote', vote => {
   if(vote.type === 'test') {
-    console.log(`Test worked!`)
+    let webhook = new WebhookClient('719929466931118110', 'Gu6_T49edPjSoSdB2w6e7g4K7rer_EC6FGvXCGtptZWKY6GYCEnTmIl79Rb1pZP0-iYt')
+    const success = new MessageEmbed()
+    .setColor('GREEN')
+    .setTitle('Test success!')
+    
+    return console.log(`Test worked!`) && webhook.send(success)
   }
   console.log(`User with ID ${vote.user} just voted!`);
 });
