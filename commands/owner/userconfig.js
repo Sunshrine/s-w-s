@@ -44,6 +44,19 @@ module.exports = {
     console.log(inventory);
     if (!inventory || !inventory.length) inventory = "No items bought.";
     
+    const { get } = require('node-superfetch')
+    
+        const { body } = await get(
+      `https://top.gg/api/bots/692374798654898260/check`
+    )
+      .set("Authorization", process.env.DBL_TOKEN)
+      .query({ userId: message.author.id });
+    
+    let vote;
+    if(body.voted === 1) vote = true
+    if(body.voted === 0) vote = false
+    
+    
     const embed = new MessageEmbed()
     .setTitle('User Config')
     .setDescription(`Here is the config saved for the user ${user}.`)
@@ -51,6 +64,7 @@ module.exports = {
     .addField('Acknowlegdements', acknowledgements)
     .addField('Coins', `${coin} ${bal}`)
     .addField('Inventory', inventory)
+    .addField('Voted', vote)
     
     message.channel.send(embed)
     

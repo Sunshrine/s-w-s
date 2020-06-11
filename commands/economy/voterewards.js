@@ -25,7 +25,7 @@ module.exports = {
       .query({ userId: message.author.id });
   
 
-    if (body.voted === 0 && body.voted !== 1) {
+    if (body.voted === 0) {
       const novote = new MessageEmbed()
         .setColor("RED")
         .setDescription(
