@@ -38,8 +38,17 @@ dbl.webhook.on('vote', vote => {
     return webhook.send(success).then(() => {
       console.log('Test worked!')
   })
+}
+    let webhook = new WebhookClient('719929466931118110', 'Gu6_T49edPjSoSdB2w6e7g4K7rer_EC6FGvXCGtptZWKY6GYCEnTmIl79Rb1pZP0-iYt')
+    const success = new MessageEmbed()
+    .setColor('GREEN')
+    .setTitle(`User with ID ${vote.user} has voted!`)
+    .setDescription(`Thank you ${client.users.cache.get(vote.user).username} for voting!`)
+    
+    webhook.send(success)
+    
   console.log(`User with ID ${vote.user} just voted!`);
-}})
+})
 
 client.commands = new Collection();
 client.aliases = new Collection();
