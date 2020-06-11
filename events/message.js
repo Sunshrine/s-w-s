@@ -3,6 +3,7 @@ module.exports = async (client, message) => {
   const db = require("quick.db");
   const default_prefix = "&";
   const settings = require("../settings.json");
+  const redeem = []
 
   if (message.author.bot) return;
   if (!message.guild) return;
@@ -39,7 +40,7 @@ module.exports = async (client, message) => {
   if (prefix === null) prefix = default_prefix;
   
   const minimum = 1;
-  const maximum = 100;
+  const maximum = 1000;
   const rng = Math.random() * (maximum - minimum) + minimum;
   console.log(rng)
 
