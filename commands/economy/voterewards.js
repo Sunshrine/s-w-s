@@ -23,6 +23,9 @@ module.exports = {
     )
       .set("Authorization", process.env.DBL_TOKEN)
       .query({ userId: message.author.id });
+    
+    console.log(body.vote)
+    console.log(process.env.DBL_TOKEN)
 
     if (body.vote === 0) {
       const novote = new MessageEmbed()
