@@ -17,7 +17,7 @@ We hope you enjoy your time and stay here!
 We are honoured to have you here!`)
     );
 
-  let channel = channel.channels.cache.get(welcomechannel);
+  let channel = client.channels.cache.get(welcomechannel);
   if (!channel || !channel.length) return;
 
   channel.send(welcome);
