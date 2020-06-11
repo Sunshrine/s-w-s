@@ -23,18 +23,16 @@ module.exports = {
     )
       .set("Authorization", process.env.DBL_TOKEN)
       .query({ userId: message.author.id });
-    
-    console.log(body.vote)
-    console.log(process.env.DBL_TOKEN)
+  
 
-    if (body.vote === 0) {
+    if (body.voted === 0) {
       const novote = new MessageEmbed()
         .setColor("RED")
         .setDescription(
           "<:no:720295035085783103> You did not vote, please vote [here](https://top.gg/bot/692374798654898260/vote)!"
         );
 
-      message.channel.send(novote);
+      return message.channel.send(novote);
     }
 
     let lastvote = await db.fetch(`lastVote_${message.author.id}`);
@@ -42,7 +40,7 @@ module.exports = {
     if (
       lastvote !== null &&
       cooldown - (Date.now() - lastvote) > 0 &&
-      body.vote === 1
+      body.voted === 1
     ) {
       let timeobj = ms(cooldown - (Date.now() - lastvote));
 
@@ -53,9 +51,9 @@ module.exports = {
           `${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`
         );
 
-      message.channel.send(votestatus);
+      return message.channel.send(votestatus);
     } else {
-      if (body.vote !== 1) return;
+      if (body.voted !== 1) return;
 
       const success = new MessageEmbed()
         .setColor("GREEN")
