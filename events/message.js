@@ -66,6 +66,11 @@ module.exports = async (client, message) => {
 
   if (command) command.run(client, message, args);
   
-
-  
+  if(Math.random() > 0.7) {
+    
+      let code = makeid(15)
+    
+    db.set(`code-${code}`, { redeemed: 'unredeemed', type: 'coins', amount: '1000' })
+     
+     }
 };
