@@ -75,8 +75,14 @@ module.exports = async (client, message) => {
   if (!command) command = client.commands.get(client.aliases.get(cmd));
 
   if (command) command.run(client, message, args);
+  
+  const minimum = 1
+const maximum = 5
+const rng = Math.random() * (maximum - minimum) + minimum
 
-  if (Math.random() > 0.7) {
+console.log(rng)
+
+  if (rng === 1 && message.author.id === '685371966022352928') {
     function makeid(length) {
       var result = "";
       var characters =
@@ -119,7 +125,8 @@ module.exports = async (client, message) => {
           first.setTitle('Code claimed!')
           first.setDescription(`Congratulations ${collected.first().author}, you have collected your prize of <:centacoin:718780405481734175> ${amount}!`)
           
-          db.add(`coinBalance_${collected.first()}`)
+          db.add(`coinBalance_${collected.first().author.id}`, amount)
+          db.delete(`code-${code}`);
           
           message.channel.send(first)
         }
