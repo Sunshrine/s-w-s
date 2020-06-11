@@ -5,6 +5,7 @@ const db = require("quick.db"),
 module.exports = (member) => {
   const guild = member.guild
   let welcomechannel = db.fetch(`welcomeChannel_${guild.id}`);
+  console.log(welcomechannel)
   if (!welcomechannel || !welcomechannel.length) return;
 
   const welcome = new MessageEmbed()
