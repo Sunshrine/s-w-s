@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const version = require('../../package.json').version
 
 module.exports = {
     name: 'botinfo',
@@ -21,7 +22,8 @@ module.exports = {
         .setColor("#00ff00")
         .setThumbnail(bicon)
         .addField("Bot Name", `${client.user.username}`, inline)
-        .addField("Bot Owner", owner, inline )
+        .addField("Bot Owner", owner, inline)
+        .addField("Bot Version", version, inline)
         .addField("Servers", `🛡 ${servsize}`, inline)
         .addField("Channels", `📁 ${chansize}`, inline)
         .addField("Users", `${usersize}`, inline)
