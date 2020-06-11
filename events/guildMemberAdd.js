@@ -2,7 +2,7 @@ const db = require("quick.db"),
   { MessageEmbed } = require("discord.js"),
   { stripIndents } = require("common-tags");
 
-module.exports = (member) => {
+module.exports = (client, member) => {
   const guild = member.guild
   let welcomechannel = db.fetch(`welcomeChannel_${guild.id}`);
   console.log(welcomechannel)

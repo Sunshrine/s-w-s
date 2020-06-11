@@ -35,10 +35,11 @@ dbl.webhook.on('vote', vote => {
     .setColor('GREEN')
     .setTitle('Test success!')
     
-    return webhook.send(success).then(console => console.log('Test worked!'))
-  }
+    return webhook.send(success).then(() => {
+      console.log('Test worked!')
+  })
   console.log(`User with ID ${vote.user} just voted!`);
-});
+}})
 
 client.commands = new Collection();
 client.aliases = new Collection();
