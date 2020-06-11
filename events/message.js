@@ -8,24 +8,30 @@ module.exports = async (client, message) => {
   if (!message.guild) return;
 
   if (message.content.includes(message.mentions.users.first())) {
-    let mentioned = db.fetch(`isAfk_${message.mentions.users.first().id}.status`)
+    let mentioned = db.fetch(
+      `isAfk_${message.mentions.users.first().id}.status`
+    );
     if (mentioned === true) {
       let afkEmbed = new MessageEmbed()
         .setColor("ORANGE")
         .setDescription(
-          `**${message.mentions.users.first().username}** is currently AFK. \n**Reason:** ${db.fetch(`isAfk_${message.mentions.users.first().id}.reason`)}`
+          `**${
+            message.mentions.users.first().username
+          }** is currently AFK. \n**Reason:** ${db.fetch(
+            `isAfk_${message.mentions.users.first().id}.reason`
+          )}`
         );
       message.channel.send(afkEmbed);
     }
   }
-  let afkcheck = db.fetch(`isAfk_${message.author.id}.status`)
+  let afkcheck = db.fetch(`isAfk_${message.author.id}.status`);
   if (afkcheck === true) {
     let unAFKEmbed = new MessageEmbed()
       .setColor("ORANGE")
       .setDescription(
         `${message.author.username}, you have been removed from the afk list!`
       );
-    db.set(`isAfk_${message.author.id}.status`, false)
+    db.set(`isAfk_${message.author.id}.status`, false);
     message.reply(unAFKEmbed).then(m => m.delete({ timeout: 5000 }));
   }
 
@@ -46,11 +52,15 @@ module.exports = async (client, message) => {
       })
     );
   }
-  
-  let serverblacklist = db.fetch(`serverBlacklist_${message.guild.id}_${message.author.id}`)
-  if(serverblacklist && serverblacklist !== null) {
-    message.delete()
-    return message.channel.send(`${message.author}, you are blacklisted in this server, meaning you cannot use commands here.`)
+
+  let serverblacklist = db.fetch(
+    `serverBlacklist_${message.guild.id}_${message.author.id}`
+  );
+  if (serverblacklist && serverblacklist !== null) {
+    message.delete();
+    return message.channel.send(
+      `${message.author}, you are blacklisted in this server, meaning you cannot use commands here.`
+    );
   }
 
   const args = message.content
@@ -65,12 +75,44 @@ module.exports = async (client, message) => {
   if (!command) command = client.commands.get(client.aliases.get(cmd));
 
   if (command) command.run(client, message, args);
-  
-  if(Math.random() > 0.7) {
+
+  if (Math.random() > 0.7) {
+    function makeid(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    }
+
+    function getRandomIntInclusive(min, max) {
+      let x = Math.floor(Math.random() * (max - min + 1) + min);
+      return x;
+    }
     
-      let code = makeid(15)
+    let amount = getRandomIntInclusive(260, 2600)
+
+    let code = makeid(15);
+    db.set(`code-${code}`, {
+      redeemed: "unredeemed",
+      type: "coins",
+      amount: amount
+    });
     
-    db.set(`code-${code}`, { redeemed: 'unredeemed', type: 'coins', amount: '1000' })
-     
-     }
+    const filter = m => m.content.includes(code) && !m.author.bot
+    
+    const first = new MessageEmbed()
+    .setColor('GREEN')
+    .setTitle('Rare event!')
+    .setDescription(`First one to type \`\`${prefix}redeem ${code}\`\` wins <:centacoin:718780405481734175> ${amount}!`)
+    
+    message.channel.send(first).then(() => {
+      message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
+    })
+  }
 };
