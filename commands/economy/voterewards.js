@@ -16,10 +16,7 @@ module.exports = {
     let cooldown = 4.32e7,
       amount = getRandomIntInclusive(260, 1100);
     
-    const { listener } = require('../../index.js')
-
-    const DBL = require('dblapi.js');
-    const dbl = new DBL(process.env.DBL_TOKEN, { webhookServer: listener, webhookAuth: 'mylittlecentauri' }, client);
+    const { listener, dbl } = require('../../index.js')
 
     dbl.hasVoted(message.author.id).then(async voted => {
       let lastvote = await db.fetch(`lastVote_${message.author.id}`);
