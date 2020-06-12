@@ -38,12 +38,12 @@ let categories = []; // Lets define categories as an empty array so we can add t
                 for (var c in items) { // This runs off of all commands
                     if (categories[i] === items[c].type) {
                       
-                      let itememoji = items[c].emoji ? `${items[c].emoji} || ` : null
+                      let itememoji = items[c].emoji ? `${items[c].emoji} - ` : null
                       if(itememoji === null) itememoji = ''
 
                         tempDesc += `${itememoji}**Name:** ${items[c].name} 
 **Price:** <:centacoin:718780405481734175> ${items[c].price} 
-**Description:** ${items[c].description}\n`; // Remember that \n means newline
+**Description:** ${items[c].description}\n\n`; // Remember that \n means newline
 
 
                     }

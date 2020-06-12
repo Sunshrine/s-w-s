@@ -3,29 +3,33 @@
     "name": "Pickle",
     "type": "Fun",
     "price": "100",
-    "description": "You want a pickle? 🥒",
-    "usagemsg": "You ate that pickle, it was sour and tasty!"
+    "description": "You want a pickle?",
+    "usagemsg": "You ate that pickle, it was sour and tasty!",
+    "emoji": "🥒"
   },
   "Weed": {
     "name": "Weed",
     "type": "Drugs",
     "price": "100",
     "description": "Ehh, it's weed.",
-    "usagemsg": "You used the weed, now you're high, congrats!"
+    "usagemsg": "You used the weed, now you're high, congrats!",
+    "emoji": "<:weed:721037111977050233>"
   },
   "Lollipop": {
     "name": "Lollipop",
     "type": "Sweets",
     "price": "50",
     "description": "Sweet, sweet lollipop.",
-    "usagemsg": "You are now in love with that lollipop."
+    "usagemsg": "You are now in love with that lollipop.",
+    "emoji": "🍭"
   },
   "Fish": {
     "name": "Fish",
     "type": "Food",
     "price": "50",
     "description": "It's a fish, you wanna eat it or slap someone with it?",
-    "usagemsg": "You slapped a person with that fish, then you cleaned it and GRILLed it."
+    "usagemsg": "You slapped a person with that fish, then you cleaned it and GRILLed it.",
+    "emoji": "🐠"
   },
   "KFC": {
     "name": "KFC",
@@ -40,6 +44,7 @@
     "type": "Bot Premium",
     "price": "1000000",
     "description": "Buy Centapremium today!",
-    "usagemsg": "Congrats! Now you have C e n t a p r e m i u m !"
+    "usagemsg": "Congrats! Now you have C e n t a p r e m i u m !",
+    "emoji": "<:premium:721037514944806953>"
   }
 }
