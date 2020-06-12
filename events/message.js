@@ -3,12 +3,9 @@ module.exports = async (client, message) => {
   const db = require("quick.db");
   const default_prefix = "&";
   const settings = require("../settings.json");
-  const status = 'On Maintenance' 
 
   if (message.author.bot) return;
   if (!message.guild) return;
-  
-  
 
   if (message.content.includes(message.mentions.users.first())) {
     let mentioned = db.fetch(
@@ -107,7 +104,6 @@ module.exports = async (client, message) => {
   if (!message.content.startsWith(prefix)) return;
   if (!message.member)
     message.member = await message.guild.fetchMember(message);
-  
   
   if (
     client.blacklistedChannels.has(message.channel.id) &&
