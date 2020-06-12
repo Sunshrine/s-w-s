@@ -32,7 +32,8 @@
     "type": "Food",
     "price": "50",
     "description": "A WILD BUCKET OF KFC APPEARED!",
-    "usagemsg": "Colonel Sanders has entered the chat. He was happy to see you eating your KFC."
+    "usagemsg": "Colonel Sanders has entered the chat. He was happy to see you eating your KFC.",
+    "emoji": "<:kfcbucket:721032737980547122>"
   },
   "Centapremium":{
     "name": "Centapremium",

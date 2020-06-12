@@ -37,8 +37,14 @@ let categories = []; // Lets define categories as an empty array so we can add t
 
                 for (var c in items) { // This runs off of all commands
                     if (categories[i] === items[c].type) {
+                      
+                      let itememoji = items[c].emoji ? `${items[c].emoji} || ` : null
+                      if(itememoji === null) itememoji = ''
 
-                        tempDesc += `${items[c].name} - $${items[c].price} - ${items[c].description}\n`; // Remember that \n means newline
+                        tempDesc += `${itememoji}**Name:** ${items[c].name} 
+**Price:** <:centacoin:718780405481734175> ${items[c].price} 
+**Description:** ${items[c].description}\n`; // Remember that \n means newline
+
 
                     }
 
@@ -64,12 +70,14 @@ let categories = []; // Lets define categories as an empty array so we can add t
         let itemName = '';
         let itemPrice = 0;
         let itemDesc = '';
+    let itemEmoji = '';
 
         for (var i in items) { // Make sure you have the correct syntax for this.
             if (args.join(" ").trim().toUpperCase() === items[i].name.toUpperCase()) { // If item is found, run this...
                 itemName = items[i].name;
                 itemPrice = items[i].price;
                 itemDesc = items[i].desc;
+              if(items[i].emoji) itemEmoji = items[i].emoji
             }
         }
 
