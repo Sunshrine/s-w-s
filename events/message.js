@@ -42,7 +42,6 @@ module.exports = async (client, message) => {
   const minimum = 1;
   const maximum = 1000;
   const rng = Math.random() * (maximum - minimum) + minimum;
-  console.log(rng)
 
   if (rng < 1.5) {
     function makeid(length) {

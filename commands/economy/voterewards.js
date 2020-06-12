@@ -15,69 +15,67 @@ module.exports = {
 
     let cooldown = 4.32e7,
       amount = getRandomIntInclusive(260, 1100);
+    
+    const { listener } = require()
 
-    const { dbl } = require('../../index.js');
+    const DBL = require('dblapi.js');
+    const dbl = new DBL(process.env.DBL_TOKEN, { webhookServer: listener, webhookAuth: 'mylittlecentauri' }, client);
 
-dbl.getUser(message.author.id).then(user => {
-if(voted){
+    dbl.hasVoted(message.author.id).then(async voted => {
+      let lastvote = await db.fetch(`lastVote_${message.author.id}`);
 
-} else {
+      if (!voted) {
+        const novote = new MessageEmbed()
+          .setColor("RED")
+          .setDescription(
+            "<:no:720295035085783103> You did not vote, please vote [here](https://top.gg/bot/692374798654898260/vote)!"
+          );
 
-}
-});
-  
+        return message.channel.send(novote);
+      }
 
-    if (body.voted === 0) {
-      const novote = new MessageEmbed()
-        .setColor("RED")
-        .setDescription(
-          "<:no:720295035085783103> You did not vote, please vote [here](https://top.gg/bot/692374798654898260/vote)!"
+      if (
+        lastvote !== null &&
+        cooldown - (Date.now() - lastvote) > 0 &&
+        voted
+      ) {
+        let timeobj = ms(cooldown - (Date.now() - lastvote));
+
+        const votestatus = new MessageEmbed()
+          .setColor("RED")
+          .setTitle("Reward already collected!")
+          .setDescription(
+            `${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`
+          );
+
+        return message.channel.send(votestatus);
+      }
+
+      if (voted && lastvote === null) {
+        const success = new MessageEmbed()
+          .setColor("GREEN")
+          .setTitle("Successfully collected award!")
+          .setDescription(
+            `Thank you for voting for Centauri! You have gained <:centacoin:718780405481734175> ${amount} as an reward and thank you!`
+          );
+
+        db.set(`lastVote_${message.author.id}`, Date.now());
+        db.add(`coinBalance_${message.author.id}`, amount);
+
+        message.channel.send(success);
+
+        let webhook = new WebhookClient(
+          "720627238659293184",
+          "XooM_3qKk3uYsAoMnKhd9DJhfAHlQzwfcmiRDa40El0e2dLs7MA233MQLZ1hbHMDNMV8"
         );
-
-      return message.channel.send(novote);
-    }
-
-    let lastvote = await db.fetch(`lastVote_${message.author.id}`);
-
-    if (
-      lastvote !== null &&
-      cooldown - (Date.now() - lastvote) > 0 &&
-      body.voted === 1
-    ) {
-      let timeobj = ms(cooldown - (Date.now() - lastvote));
-
-      const votestatus = new MessageEmbed()
-        .setColor("RED")
-        .setTitle("Reward already collected!")
-        .setDescription(
-          `${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`
-        );
-
-      return message.channel.send(votestatus);
-    } else {
-      if (body.voted !== 1) return;
-
-      const success = new MessageEmbed()
-        .setColor("GREEN")
-        .setTitle("Successfully collected award!")
-        .setDescription(
-          `Thank you for voting for Centauri! You have gained <:centacoin:718780405481734175> ${amount} as an reward and thank you!`
-        );
-
-      db.set(`lastVote_${message.author.id}`, Date.now());
-      db.add(`coinBalance_${message.author.id}`, amount);
-
-      message.channel.send(success);
-
-      let webhook = new WebhookClient(
-        "720627238659293184",
-        "XooM_3qKk3uYsAoMnKhd9DJhfAHlQzwfcmiRDa40El0e2dLs7MA233MQLZ1hbHMDNMV8"
-      );
-      let collected = new MessageEmbed()
-        .setColor("BLUE")
-        .setDescription(
-          `${message.author.username} has collected their vote reward of ${amount} coins.`
-        );
-    }
+        let collected = new MessageEmbed()
+          .setColor("BLUE")
+          .setDescription(
+            `${message.author.username} has collected their vote reward of ${amount} coins.`
+          );
+        
+        webhook.send(collected)
+      }
+    });
   }
 };
