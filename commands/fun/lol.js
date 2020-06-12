@@ -27,23 +27,7 @@ module.exports = {
 
     message.delete();
 
-    const webhooks = await message.channel.fetchWebhooks();
-    const myWebhooks = webhooks.filter(
-      webhook =>
-        webhook.owner.id === client.user.id && webhook.name === member.username
-    );
-    
-    if(myWebhooks || myWebhooks.size !== 0 || myWebhooks !== null) {
-      console.log(`ID: ${myWebhooks.id}`)
-      let instance1 = new WebhookClient(myWebhooks.id, myWebhooks.token)
-      instance1.send(arg)
-    } else {
-      let instance2 = message.channel.createWebhook(member.username, {
-        avatar: member.displayAvatarURL()
-      }).then(instance2 => {
-        instance2.send(arg)
-      })
-    }
+
 
   },
 };
