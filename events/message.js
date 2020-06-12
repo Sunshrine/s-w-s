@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
   const rng = Math.random() * (maximum - minimum) + minimum;
   console.log(rng)
 
-  if (rng < 50.5 && message.author.id === "685371966022352928") {
+  if (rng < 1.5) {
     function makeid(length) {
       var result = "";
       var characters =

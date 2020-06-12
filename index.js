@@ -16,6 +16,7 @@ setInterval(() => {
 const { Client, Collection, MessageEmbed, MessageAttachment, WebhookClient } = require("discord.js");
 const { config } = require("dotenv");
 const NewsAPI = require('newsapi')
+const db = require('quick.db')
 
 
 const client = new Client({
@@ -46,6 +47,8 @@ dbl.webhook.on('vote', vote => {
     .setDescription(`Thank you ${client.users.cache.get(vote.user).username} for voting!`)
     
     webhook.send(success)
+    db.set(`userData_${vote.user}.indexed.voted`, true)
+  db.set()
     
   console.log(`User with ID ${vote.user} just voted!`);
 })
