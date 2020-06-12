@@ -16,7 +16,7 @@ module.exports = {
     let cooldown = 4.32e7,
       amount = getRandomIntInclusive(260, 1100);
     
-    const { listener } = require()
+    const { listener } = require('../../index.js')
 
     const DBL = require('dblapi.js');
     const dbl = new DBL(process.env.DBL_TOKEN, { webhookServer: listener, webhookAuth: 'mylittlecentauri' }, client);
