@@ -16,13 +16,15 @@ module.exports = {
     let cooldown = 4.32e7,
       amount = getRandomIntInclusive(260, 1100);
 
-    const { get } = require("node-superfetch");
+    const { dbl } = require('../../index.js');
 
-    const { body } = await get(
-      `https://top.gg/api/bots/692374798654898260/check`
-    )
-      .set("Authorization", process.env.DBL_TOKEN)
-      .query({ userId: message.author.id });
+dbl.getUser(message.author.id).then(user => {
+if(voted){
+
+} else {
+
+}
+});
   
 
     if (body.voted === 0) {

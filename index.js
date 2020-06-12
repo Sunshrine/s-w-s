@@ -48,7 +48,8 @@ dbl.webhook.on('vote', vote => {
     
     webhook.send(success)
     db.set(`userData_${vote.user}.indexed.voted`, true)
-  db.set()
+    db.set(`userData_${vote.user}.indexed.votetime`, new Date.now())
+    db.set(`userData_${vote.user}.indexed.gvr`, true)
     
   console.log(`User with ID ${vote.user} just voted!`);
 })
