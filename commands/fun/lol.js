@@ -26,8 +26,14 @@ module.exports = {
     }
 
     message.delete();
-
-
+    
+    message.channel.createWebhook(member.username, {
+      avatar: member.displayAvatarURL()
+    }).then(webhook => {
+      webhook.send(arg).then(async () => {
+        await webhook.delete()
+      })
+    })
 
   },
 };
