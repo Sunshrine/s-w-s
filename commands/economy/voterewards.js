@@ -15,10 +15,8 @@ module.exports = {
 
     let cooldown = 4.32e7,
       amount = getRandomIntInclusive(260, 1100);
-    
-    const { listener, dbl } = require('../../index.js')
 
-    dbl.hasVoted(message.author.id).then(async voted => {
+    client.dbl.hasVoted(message.author.id).then(async voted => {
       let lastvote = await db.fetch(`lastVote_${message.author.id}`);
 
       if (!voted) {
