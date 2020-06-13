@@ -33,12 +33,12 @@ module.exports = {
             .setDescription("Please reply with \`\`yes\`\` or \`\`no\`\` (y/n) within 20 seconds to confirm you want to send your mail.")
             .addField('Mail Content', mail, true)
             
-            const filtere = m => m.content.includes('yes' | 'no' | 'y' | 'n')
+            const filtere = m => m.content.includes('yes' || 'no' || 'y' || 'n')
             
             c.send(embed).then(() => {
               const collector = c.createMessageCollector(filtere, { time: 30000 })
               collector.on('collect', async m => {
-                if(m.content.includes('yes' | 'y')) {
+                if(m.content.includes('yes' || 'y')) {
                           let sentmail = await client.users.cache.get(mailmember.id).send(mailembed).catch(err => {
             console.error(err)
             message.channel.send(`**Cannot send mail to ${mailmember}...`).then(m => m.delete({"timeout": 5000}))
@@ -69,16 +69,18 @@ module.exports = {
 
         return c.send(`You have successfully sent your mail to ${mailmember}!`).then(m => m.delete({"timeout": 5000}))
                 }
-                if(m.content.includes('no' | 'n')) {
+                if(m.content.includes('no' || 'n')) {
                   return c.send(`Cancelled email.`)
                 }
               })
               collector.on('end', async reason => {
                 if(reason === 'time') {
-                  c.send(`You didn't reply within 20 seconds, email cancelled`)
+                  c.send(`You didn't reply within 20 seconds, email cancelled.`)
                 }
               })
             })
+          }).catch(err => {
+            if(err) confirm.edit('There was an error trying to send the DM to you, maybe you disabled DMs?')
           })
      
     }
