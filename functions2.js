@@ -1,6 +1,7 @@
 module.exports = (client) => {
   const { prefix } = require('/events/message.js')
-  function createLottery(time, channelID) {
+  const ms = require('parse-ms')
+  async function createLottery(time, channelID) {
     if(isNaN(time) || time < 0) {
       return null
     }
@@ -11,14 +12,19 @@ module.exports = (client) => {
     
     const { MessageEmbed } = require('discord.js')
     
+    const timeObj = ms(time)
+    if(ms.getHours())
+    
     const embed = new MessageEmbed()
     .setColor('BLUE')
     .setTitle('🎉 Lottery 🎉')
-    .setDescription(`To join contribute using ${prefix}lottery <amount>.`)
+    .setDescription(`__Time Remaining:__ `)
+    .setFooter(`To join contribute using ${prefix}lottery <amount>.`)
     
     const channel = client.channels.cache.get(channelID)
     if(!channel) return
     
-    channel.send(embed)
+    let x = await channel.send(embed)
+    return { id: x.id }
   }
 }

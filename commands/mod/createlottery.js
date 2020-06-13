@@ -1,5 +1,6 @@
 const { createLottery } = require('../../functions2.js'),
       ms = require('ms'),
+      ms2 = require('parse-ms'),
       db = require('quick.db')
 
 module.exports = {
@@ -16,21 +17,15 @@ module.exports = {
     
     let lasts = ms(args[0])
     
-    createLottery(lasts, message.channel.id).then(() => {
+    createLottery(lasts, message.channel.id).then(id => {
       db.set(`lottery_${message.guild.id}`, { prize: 0 })
 
       setInterval(() => {
-    if (lastdaily !== null && cooldown - (Date.now() - lastdaily) > 0) {
-      let timeobj = ms(cooldown - (Date.now() - lastdaily));
 
-      dailystatus.setColor("RED");
-      dailystatus.setTitle("Reward already collected!");
-      dailystatus.setDescription(
-        `${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`
-      );
-
-      message.channel.send(dailystatus);
-    }
+      let timeobj = ms2(Date.now() - lasts);
+        message.channel.messages.fetch(id).then(m => {
+          m.edit
+        })
       })
     })
     
