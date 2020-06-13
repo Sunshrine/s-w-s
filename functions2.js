@@ -28,6 +28,15 @@ module.exports = (client) => {
     };
 }
     
+    var duration = convertMS(time)
+    var time;
+    if(duration.seconds === 0) {
+      time = `${duration.minutes} minutes`
+      if(duration.minutes === 0) {
+        time = `${duration}`
+      }
+    }
+    
     
     var embed = new MessageEmbed()
     .setColor('BLUE')
