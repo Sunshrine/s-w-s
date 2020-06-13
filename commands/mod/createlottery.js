@@ -18,6 +18,20 @@ module.exports = {
     
     createLottery(lasts, message.channel.id).then(() => {
       db.set(`lottery_${message.guild.id}`, { prize: 0 })
+
+      setInterval(() => {
+    if (lastdaily !== null && cooldown - (Date.now() - lastdaily) > 0) {
+      let timeobj = ms(cooldown - (Date.now() - lastdaily));
+
+      dailystatus.setColor("RED");
+      dailystatus.setTitle("Reward already collected!");
+      dailystatus.setDescription(
+        `${message.member}, please wait *${timeobj.hours}* **hours**, *${timeobj.minutes}* **minutes** and *${timeobj.seconds}* **seconds**!`
+      );
+
+      message.channel.send(dailystatus);
+    }
+      })
     })
     
   }
