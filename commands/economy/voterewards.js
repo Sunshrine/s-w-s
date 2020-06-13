@@ -44,9 +44,8 @@ module.exports = {
           );
 
         return message.channel.send(votestatus);
-      }
-
-      if (voted && lastvote === null) {
+      } else {
+        if (voted) {
         const success = new MessageEmbed()
           .setColor("GREEN")
           .setTitle("Successfully collected award!")
@@ -70,7 +69,11 @@ module.exports = {
           );
         
         webhook.send(collected)
-      }
-    });
-  }
+      
+        }
+      } 
+    })
+    
+    
+    } 
 };
