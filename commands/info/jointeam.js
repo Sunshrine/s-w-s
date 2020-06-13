@@ -12,7 +12,7 @@ module.exports = {
     }).then(webhook => {
       const join = new MessageEmbed()
       .setColor('GREEN')
-      .setDescription('Please wait until CentaDev applications are made!')
+      .setDescription('Apply for CentaDev [here](https://forms.gle/b48AKyLfWYt1QAqj6)!}')
       
       webhook.send(join).then(async () => {
         await webhook.delete()
