@@ -11,22 +11,26 @@ module.exports = (client) => {
       return null
     }
     
-    var duration = Date.now() - time
+    var startAt = Date.now()
+    var endAt = Date.now() + time
     
+    var duration = endAt - Date.now();
     
     var embed = new MessageEmbed()
     .setColor('BLUE')
     .setTitle('🎉 Lottery 🎉')
-    .setDescription(`__Time Remaining:__ ${ms(ms(time))}`)
+    .setDescription(`__Time Remaining:__ ${ms(ms(duration), { long: true })}`)
     .setFooter(`To join contribute using ${prefix}lottery <amount>.`)
+    .setTimestamp(`Ends At | ${new Date(endAt).toISOString()}`)
     
     let channel = client.channels.cache.get(channelID)
     if(!channel) return
     
     let x = await channel.send(embed)
     
+    
     setInterval(() => {
-      embed.edit(`__Time Remaining:__ ${ms(ms(time), { long: true })}`)
+      embed.edit(`__Time Remaining:__ ${ms(ms(duration), { long: true })}`)
     })
   }
 }
