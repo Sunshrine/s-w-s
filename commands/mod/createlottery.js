@@ -30,7 +30,7 @@ module.exports = {
     .setColor("BLUE")
     .setTitle("🎉 Lottery 🎉")
     .setDescription(`Prize: <:centacoin:718780405481734175> 0 - Participating Users: 0`)
-    .setFooter(`Ends At | ${endsAt} | To partic`)
+    .setFooter(`Ends At | ${endsAt} | To participate buy a lottery ticket via the buyticket command.`)
     
     let x = await message.channel.send(embed)
     await db.set(`lottery_${message.guild.id}`, { users: [], prize: 0, messageID: x.id, channelID: message.channel.id })
