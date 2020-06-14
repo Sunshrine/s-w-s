@@ -20,6 +20,9 @@ module.exports = {
     let bal = db.fetch(`coinBalance_${message.author.id}`)
     if(bal < amount) return message.reply('you don\'t have that much coins!')
     
+    let users = db.fetch(`lottery_${message.guild.id}.users`)
+    if(users.includes(message.author.id)) return message.reply('you are already in the lottery!')
+    
     await db.add(`lottery_${message.guild.id}.prize`, amount)
     await db.subtract(`coinBalance_${message.author.id}`, amount)
     await db.push(`lottery_${message.guild.id}.users`, message.author.id)
