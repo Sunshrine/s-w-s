@@ -16,23 +16,30 @@ module.exports = {
     let messageID = db.fetch(`lottery_${message.guild.id}.messageID`)
     if(messageID !== args[0]) return message.reply('there is no lottery with that ID!')
     
+        let channelID = db.fetch(`lottery_${message.guild.id}.channelID`)
+    if(!channelID) return;
+    
     let channel = client.channels.cache.get(channelID)
     if(!channel) return;
     
     channel.messages.fetch(messageID).then(m => {
       
       let users = db.fetch(`lottery_${message.guild.id}.users`)
+      if(users.length === 1) var user = users[1]
       var user = users[Math.floor(Math.random() * users.length)]
       
       var select = m.guild.members.fetch(user)
       
     const embed = new MessageEmbed()
     .setColor("BLUE")
-    .setTitle("🎉 Lottery 🎉")
+    .setTitle("🎉 Lottery Ended 🎉")
     .setDescription(`Prize: <:centacoin:718780405481734175> ${db.fetch(`lottery_${message.guild.id}.prize`)} - Winner: ${select}`)
-    .setFooter(`To participate buy a lottery ticket via the buyticket command.`)
+    .setFooter(`The lottery ended.`)
+    
+    let prize = 
     
     m.edit(embed)
+      db.add(`coinBalance_${user}`, )
     })
   }
 };
