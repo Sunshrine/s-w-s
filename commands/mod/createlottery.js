@@ -10,15 +10,10 @@ module.exports = {
   run: async (client, message, args) => {
    
      if(!message.member.hasPermission(["ADMINISTRATOR" || "MANAGE_CHANNELS"])) return message.channel.send("Sorry, you can't use this command!")
-    
-    if(!args[0]) message.reply('please enter a time!')
+
     
       let prefix = db.get(`botPrefix_${message.guild.id}`);
       if (prefix === null) prefix = '&'
-    
-    
-    let users = db.get(`lottery_${message.guild.id}.users`)
-    users = users.length
     
     const embed = new MessageEmbed()
     .setColor("BLUE")
