@@ -34,15 +34,30 @@ module.exports = {
         )
         .setFooter(`To join contribute using the lottery command.`)
         .setTimestamp(`Ends At | ${new Date(endAt).toISOString()}`);
+      
+      db.set(`lottery_${channelID}`, { prize: 0 });
 
       let x = await channel.send(embed);
 
-      setInterval(() => {
+      var s = setInterval(() => {
+        var duration = endAt - Date.now();
         embed.setDescription(
           `__Time Remaining:__ ${ms(duration, { long: true })}`
         );
         x.edit(embed);
-      }, 10000);
+        
+        if(duration === 0) {
+          let users = db.fetch(`lottery_${channelID}.users`)
+          if(!users || users === null) {
+            embed.setDescription('No one won!')
+            x.edit(embed)
+            return clearInterval(s)
+          }
+        }
+      }, 5000);
+    
+      
+      
     }
 
     if (!args[0]) return message.reply("please enter a time!");
@@ -50,7 +65,6 @@ module.exports = {
     let lasts = ms(args[0]);
 
     createLottery(lasts, message.channel.id)
-      await db.set(`lottery_${message.guild.id}`, { prize: 0 });
 
   }
 };
