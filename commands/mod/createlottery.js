@@ -11,7 +11,7 @@ module.exports = {
   usage: '<m/d/w (for example 1m [1 minute], 3d [3 days] and 9w [9 weeks])>',
   run: async (client, message, args) => {
     
-    if(!args[0].includes('s' || 'm' || 'd' || 'w')) {
+    if(!args[0].includes('s') || !args[0].includes('m') || !args[0].includes('d') || args[0].includes('w')) {
       return message.reply('please insert how long the lottery lasts, for example: 1w (1 week)')
     }
     
@@ -19,14 +19,6 @@ module.exports = {
     
     createLottery(lasts, message.channel.id).then(id => {
       db.set(`lottery_${message.guild.id}`, { prize: 0 })
-
-      setInterval(() => {
-
-      let timeobj = ms2(Date.now() - lasts);
-        message.channel.messages.fetch(id).then(m => {
-          m.edit
-        })
-      })
     })
     
   }

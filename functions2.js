@@ -30,7 +30,8 @@ module.exports = (client) => {
     
     
     setInterval(() => {
-      embed.edit(`__Time Remaining:__ ${ms(ms(duration), { long: true })}`)
-    })
+      embed.setDescription(`__Time Remaining:__ ${ms(ms(duration), { long: true })}`)
+      x.edit(embed)
+    }, 60000)
   }
 }
