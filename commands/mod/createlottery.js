@@ -17,12 +17,22 @@ module.exports = {
       let prefix = db.get(`botPrefix_${message.guild.id}`);
       if (prefix === null) prefix = '&'
     
-    await db.set(`lottery_${message.guild.id}`, { users: [], prize: 0 })
+    let time = ms(args[0])
+    
+    let endsAt = Date.now() + time
+    
+    
+    
+    let users = db.get(`lottery_${message.guild.id}.users`)
+    users = users.length
     
     const embed = new MessageEmbed()
     .setColor("BLUE")
     .setTitle("🎉 Lottery 🎉")
-    .setDescription(`Prize: ${db.fetch(`lottery_${message.guild.id}.prize`) }`)
-
+    .setDescription(`Prize: <:centacoin:718780405481734175> 0 - Participating Users: 0`)
+    .setFooter(`Ends At | ${endsAt} | To partic`)
+    
+    let x = await message.channel.send(embed)
+    await db.set(`lottery_${message.guild.id}`, { users: [], prize: 0, messageID: x.id, channelID: message.channel.id })
   }
 };
