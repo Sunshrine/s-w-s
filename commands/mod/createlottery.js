@@ -9,62 +9,20 @@ module.exports = {
   aliases: ["createl"],
   usage: "<m/d/w (for example 1m [1 minute], 3d [3 days] and 9w [9 weeks])>",
   run: async (client, message, args) => {
-    async function createLottery(time, channelID) {
-      if (isNaN(time) || time < 0) {
-        return null;
-      }
-
-      if (isNaN(channelID) || channelID < 0) {
-        return null;
-      }
-
-      let channel = client.channels.cache.get(channelID);
-      if (!channel) return;
-
-      var startAt = Date.now();
-      var endAt = Date.now() + time;
-
-      var duration = endAt - Date.now();
-
-      var embed = new MessageEmbed()
-        .setColor("BLUE")
-        .setTitle("🎉 Lottery 🎉")
-        .setDescription(
-          `__Time Remaining:__ ${ms(duration, { long: true })}`
-        )
-        .setFooter(`To join contribute using the lottery command.`)
-        .setTimestamp(`Ends At | ${new Date(endAt).toISOString()}`);
-      
-      db.set(`lottery_${channelID}`, { prize: 0 });
-
-      let x = await channel.send(embed);
-
-      var s = setInterval(() => {
-        var duration = endAt - Date.now();
-        embed.setDescription(
-          `__Time Remaining:__ ${ms(duration, { long: true })}`
-        );
-        x.edit(embed);
-        
-        if(duration === 0) {
-          let users = db.fetch(`lottery_${channelID}.users`)
-          if(!users || users === null) {
-            embed.setDescription('No one won!')
-            x.edit(embed)
-            return clearInterval(s)
-          }
-        }
-      }, 5000);
+   
+     if(!message.member.hasPermission(["ADMINISTRATOR" || "MANAGE_CHANNELS"])) return message.channel.send("Sorry, you can't use this command!")
     
-      
-      
-    }
-
-    if (!args[0]) return message.reply("please enter a time!");
-
-    let lasts = ms(args[0]);
-
-    createLottery(lasts, message.channel.id)
+    if(!args[0]) message.reply('please enter a time!')
+    
+      let prefix = db.get(`botPrefix_${message.guild.id}`);
+      if (prefix === null) prefix = '&'
+    
+    await db.set(`lottery_${message.guild.id}`, { users: [], prize: 0 })
+    
+    const embed = new MessageEmbed()
+    .setColor("BLUE")
+    .setTitle("🎉 Lottery 🎉")
+    .setDescription(`Prize: ${db.fetch(`lottery_${message.guild.id}.prize`) }`)
 
   }
 };
