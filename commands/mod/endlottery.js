@@ -3,10 +3,10 @@ const ms = require("ms"),
   db = require("quick.db");
 
 module.exports = {
-  name: "createlottery",
-  description: "Create a coins lottery!",
+  name: "endlottery",
+  description: "End a coins lottery!",
   category: "mod",
-  aliases: ["createl"],
+  aliases: ["endl"],
   run: async (client, message, args) => {
    
      if(!message.member.hasPermission(["ADMINISTRATOR" || "MANAGE_CHANNELS"])) return message.channel.send("Sorry, you can't use this command!")
@@ -33,13 +33,16 @@ module.exports = {
     const embed = new MessageEmbed()
     .setColor("BLUE")
     .setTitle("🎉 Lottery Ended 🎉")
-    .setDescription(`Prize: <:centacoin:718780405481734175> ${db.fetch(`lottery_${message.guild.id}.prize`)} - Winner: ${select}`)
+    .setDescription(`Prize: <:centacoin:718780405481734175> ${db.fetch(`lottery_${message.guild.id}.prize`)} - Winner: <@${user}>`)
     .setFooter(`The lottery ended.`)
     
-    let prize = 
+    let prize = db.fetch(`lottery_${message.guild.id}.prize`)
+    var prizee = parseInt(prize)
     
     m.edit(embed)
-      db.add(`coinBalance_${user}`, )
+      db.add(`coinBalance_${user}`, prizee)
+      m.channel.send(`<@${user}> won!`)
+      db.delete(`lottery_${message.guild.id}`)
     })
   }
 };
