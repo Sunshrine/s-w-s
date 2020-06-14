@@ -7,7 +7,6 @@ module.exports = {
   description: "Create a coins lottery!",
   category: "mod",
   aliases: ["createl"],
-  usage: "<m/d/w (for example 1m [1 minute], 3d [3 days] and 9w [9 weeks])>",
   run: async (client, message, args) => {
    
      if(!message.member.hasPermission(["ADMINISTRATOR" || "MANAGE_CHANNELS"])) return message.channel.send("Sorry, you can't use this command!")
@@ -17,11 +16,6 @@ module.exports = {
       let prefix = db.get(`botPrefix_${message.guild.id}`);
       if (prefix === null) prefix = '&'
     
-    let time = ms(args[0])
-    
-    let endsAt = Date.now() + time
-    
-    
     
     let users = db.get(`lottery_${message.guild.id}.users`)
     users = users.length
@@ -30,7 +24,7 @@ module.exports = {
     .setColor("BLUE")
     .setTitle("🎉 Lottery 🎉")
     .setDescription(`Prize: <:centacoin:718780405481734175> 0 - Participating Users: 0`)
-    .setFooter(`Ends At | ${endsAt} | To participate buy a lottery ticket via the buyticket command.`)
+    .setFooter(`To participate buy a lottery ticket via the buyticket command.`)
     
     let x = await message.channel.send(embed)
     await db.set(`lottery_${message.guild.id}`, { users: [], prize: 0, messageID: x.id, channelID: message.channel.id })
